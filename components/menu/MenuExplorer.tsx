@@ -9,9 +9,10 @@ import { DishCard } from "@/components/menu/DishCard";
 import { Glass } from "@/components/ui/Glass";
 import { VegDot } from "@/components/ui/VegDot";
 import type { Combo, MenuItem, SpiceLevel } from "@/data/types";
-import { CATEGORY_LABELS } from "@/data/types";
 import { fuzzyMatch } from "@/lib/fuzzy";
+import { translate, type StringKey } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { useLang } from "@/stores/lang";
 
 /**
  * The interactive menu system — features 1, 3, 4, 5, 6, 10, 11, 15.
@@ -36,6 +37,8 @@ export function MenuExplorer({ items, combos }: { items: MenuItem[]; combos: Com
   const [priceCap, setPriceCap] = useState<number | null>(null);
   const [active, setActive] = useState<SectionId>("momos");
   const sectionRefs = useRef<Partial<Record<SectionId, HTMLElement | null>>>({});
+  const lang = useLang((s) => s.lang);
+  const label = (id: SectionId) => translate(`cat.${id}` as StringKey, lang);
 
   const filtering =
     query.trim() !== "" || veg !== "all" || spice !== null || sort !== "none" || priceCap !== null;
@@ -249,7 +252,7 @@ export function MenuExplorer({ items, combos }: { items: MenuItem[]; combos: Com
                         transition={{ type: "spring", stiffness: 380, damping: 32 }}
                       />
                     )}
-                    <span className="relative">{CATEGORY_LABELS[id]}</span>
+                    <span className={cn("relative", lang === "bn" && "font-bengali")}>{label(id)}</span>
                   </button>
                 ))}
               </div>
@@ -270,8 +273,14 @@ export function MenuExplorer({ items, combos }: { items: MenuItem[]; combos: Com
                   aria-labelledby={`${id}-heading`}
                   className="scroll-mt-36 py-10"
                 >
-                  <h2 id={`${id}-heading`} className="mb-6 font-display text-2xl font-semibold md:text-3xl">
-                    {CATEGORY_LABELS[id]}
+                  <h2
+                    id={`${id}-heading`}
+                    className={cn(
+                      "mb-6 font-display text-2xl font-semibold md:text-3xl",
+                      lang === "bn" && "font-bengali",
+                    )}
+                  >
+                    {label(id)}
                   </h2>
 
                   {id === "combos" ? (

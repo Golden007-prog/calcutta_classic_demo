@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { FavoriteButton } from "@/components/menu/FavoriteButton";
 import { Reactions } from "@/components/menu/Reactions";
-import { ShareButton } from "@/components/menu/ShareButton";
+import { ShareButton, ShareRow } from "@/components/menu/ShareButton";
 import { DishImage } from "@/components/ui/DishImage";
 import { Glass } from "@/components/ui/Glass";
 import { SpiceLevel } from "@/components/ui/SpiceLevel";
@@ -161,6 +161,12 @@ export function DishDetail({ item, inModal = false }: { item: MenuItem; inModal?
           )}
 
           <Reactions slug={item.slug} />
+
+          <ShareRow
+            title={item.name}
+            text={item.description.split(".")[0] + "."}
+            path={`/menu/${item.slug}`}
+          />
 
           <div className="mt-1 flex flex-wrap gap-3">
             <ShareButton

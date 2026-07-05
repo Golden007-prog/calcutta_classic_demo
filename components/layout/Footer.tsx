@@ -1,8 +1,12 @@
 import { Clock, MapPin } from "lucide-react";
 import Link from "next/link";
 
+import { CallButton } from "@/components/layout/CallButton";
+import { NewsletterForm } from "@/components/NewsletterForm";
+import { OpenBadge } from "@/components/OpenBadge";
 import { InstagramIcon } from "@/components/ui/icons";
 import { VegDot } from "@/components/ui/VegDot";
+import { WeatherWidget } from "@/components/WeatherBanner";
 import { site } from "@/data/site";
 
 const exploreLinks = [
@@ -59,6 +63,8 @@ export function Footer() {
             <Clock size={16} aria-hidden className="mt-0.5 shrink-0 text-momo-gold" />
             {site.hours.label}
           </p>
+          <OpenBadge />
+          <CallButton />
           <a
             href={site.instagram.url}
             target="_blank"
@@ -68,6 +74,7 @@ export function Footer() {
             <InstagramIcon size={16} className="text-momo-gold" />
             {site.instagram.handle}
           </a>
+          <WeatherWidget />
         </div>
 
         <div className="space-y-3">
@@ -84,6 +91,7 @@ export function Footer() {
             No delivery apps — walk in, call, or WhatsApp. That&apos;s the
             Shyambazar way.
           </p>
+          <NewsletterForm />
         </div>
       </div>
 

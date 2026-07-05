@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { BudgetFinder, GroupCalculator } from "@/components/foodie/BudgetTools";
+import { BadgeBoard, NextItemPoll, ReferCard } from "@/components/foodie/CommunityCorner";
 import { CompareDrawer } from "@/components/foodie/CompareDrawer";
 import { CravingMatcher } from "@/components/foodie/CravingMatcher";
 import {
@@ -77,6 +78,15 @@ export default function FoodieZonePage() {
         <MenuTour />
         <KitchenStory />
         <RecipeTeasers />
+      </div>
+
+      {/* Community corner — badges, poll, refer-a-friend */}
+      <div className="mx-auto grid max-w-6xl gap-6 px-4 pb-16 md:px-8 lg:grid-cols-2">
+        <div className="lg:col-span-2">
+          <BadgeBoard />
+        </div>
+        <NextItemPoll />
+        <ReferCard />
       </div>
     </>
   );

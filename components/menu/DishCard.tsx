@@ -10,6 +10,7 @@ import { VegDot } from "@/components/ui/VegDot";
 import type { MenuItem } from "@/data/types";
 import { segmentByRanges } from "@/lib/fuzzy";
 import { cn, formatINR } from "@/lib/utils";
+import { useLang } from "@/stores/lang";
 
 interface DishCardProps {
   item: MenuItem;
@@ -20,6 +21,7 @@ interface DishCardProps {
 
 export function DishCard({ item, nameRanges, className }: DishCardProps) {
   const segments = segmentByRanges(item.name, nameRanges ?? []);
+  const lang = useLang((s) => s.lang);
 
   return (
     <Glass
@@ -59,14 +61,18 @@ export function DishCard({ item, nameRanges, className }: DishCardProps) {
             <div className="flex items-center gap-2">
               <VegDot veg={item.veg} />
               <h3 className="font-display text-lg font-semibold leading-tight">
-                {segments.map((seg, i) =>
-                  seg.hit ? (
-                    <mark key={i} className="rounded bg-momo-gold/30 px-0.5 text-inherit">
-                      {seg.text}
-                    </mark>
-                  ) : (
-                    <span key={i}>{seg.text}</span>
-                  ),
+                {lang === "bn" && item.bengaliName ? (
+                  <span className="font-bengali">{item.bengaliName}</span>
+                ) : (
+                  segments.map((seg, i) =>
+                    seg.hit ? (
+                      <mark key={i} className="rounded bg-momo-gold/30 px-0.5 text-inherit">
+                        {seg.text}
+                      </mark>
+                    ) : (
+                      <span key={i}>{seg.text}</span>
+                    ),
+                  )
                 )}
               </h3>
             </div>

@@ -1,17 +1,10 @@
 import Link from "next/link";
 
 import { CallButton } from "@/components/layout/CallButton";
+import { LanguageToggle } from "@/components/layout/LanguageToggle";
+import { NavLinks } from "@/components/layout/NavLinks";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { Glass } from "@/components/ui/Glass";
-
-const navLinks = [
-  { href: "/menu", label: "Menu" },
-  { href: "/combos", label: "Combos" },
-  { href: "/our-story", label: "Our Story" },
-  { href: "/foodie-zone", label: "Foodie Zone" },
-  { href: "/visit", label: "Visit" },
-  { href: "/contact", label: "Contact" },
-];
 
 /**
  * Glass navbar. Scroll-condensing behaviour is feature 69 (Phase 8);
@@ -28,19 +21,12 @@ export function Navbar() {
           The <span className="text-momo-gold">Calcutta</span> Classics
         </Link>
 
-        <div className="hidden items-center gap-6 text-sm text-foreground/80 md:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="transition-colors hover:text-momo-gold"
-            >
-              {link.label}
-            </Link>
-          ))}
+        <div className="hidden items-center gap-5 text-sm text-foreground/80 lg:flex">
+          <NavLinks />
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
+          <LanguageToggle />
           <ThemeToggle />
           <CallButton className="hidden sm:inline-flex" />
         </div>

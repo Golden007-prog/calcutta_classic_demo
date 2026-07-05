@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, Noto_Serif_Bengali } from "next/font/google";
 
+import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { BottomTabBar } from "@/components/layout/BottomTabBar";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
+import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
 import { Preloader } from "@/components/preloader/Preloader";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { TopBarLoader } from "@/components/TopBarLoader";
@@ -83,11 +85,13 @@ export default function RootLayout({
           <Navbar />
           <div className="pb-24 md:pb-0">
             <main id="main" className="min-h-screen pt-16">
+              <AnnouncementBar />
               {children}
             </main>
             <Footer />
           </div>
           <BottomTabBar />
+          <WhatsAppFloat />
         </ThemeProvider>
       </body>
     </html>

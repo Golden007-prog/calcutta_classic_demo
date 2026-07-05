@@ -46,39 +46,39 @@ a reduced-motion path. Phases in parentheses show where each lands.
 
 ## Kolkata local (36–50) — Phase 7
 
-- [ ] 36. Embedded map with custom glass pin + "Get Directions" deep link
-- [ ] 37. Landmark walking guide: "Opposite Deshbandhu Park" with mini illustrated map
-- [ ] 38. Kolkata street-food culture mini-blog (3 seeded MDX posts)
-- [ ] 39. English / বাংলা language toggle (menu names + key UI)
-- [ ] 40. External Zomato/Swiggy/Google links block — NOTE: shop is not on delivery apps; Zomato/Swiggy permanently hidden, Google review link TBD
-- [ ] 41. Live open/closed badge computed from hours (12 PM–10 PM daily) in IST
-- [ ] 42. "How far am I?" geolocation distance + walk time (permission-gated, graceful denial)
-- [ ] 43. Getting-there guide: Shyambazar metro, bus, tram heritage note
-- [ ] 44. Festival banner system (Durga Puja, Poila Boishakh) with date ranges
-- [ ] 45. North Kolkata street-food history timeline (animated vertical scroll)
-- [ ] 46. Neighbourhood charm section: vintage-toned photo strip of Shyambazar
-- [ ] 47. Weather widget in footer tied to feature #24
-- [ ] 48. Announcements/pop-up events bar (dismissible, localStorage)
-- [ ] 49. Press & creator mentions wall
-- [ ] 50. "Foodie Wall" — curated local customer photo grid
+- [x] 36. Embedded map with custom glass pin + "Get Directions" deep link
+- [x] 37. Landmark walking guide: "Opposite Deshbandhu Park" with mini illustrated map
+- [x] 38. Kolkata street-food culture mini-blog (3 seeded MDX posts)
+- [x] 39. English / বাংলা language toggle (menu names + key UI)
+- [x] 40. External Zomato/Swiggy/Google links block — NOTE: shop is not on delivery apps; Zomato/Swiggy permanently hidden, Google review link TBD
+- [x] 41. Live open/closed badge computed from hours (12 PM–10 PM daily) in IST
+- [x] 42. "How far am I?" geolocation distance + walk time (permission-gated, graceful denial)
+- [x] 43. Getting-there guide: Shyambazar metro, bus, tram heritage note
+- [x] 44. Festival banner system (Durga Puja, Poila Boishakh) with date ranges
+- [x] 45. North Kolkata street-food history timeline (animated vertical scroll)
+- [x] 46. Neighbourhood charm section: vintage-toned photo strip of Shyambazar
+- [x] 47. Weather widget in footer tied to feature #24
+- [x] 48. Announcements/pop-up events bar (dismissible, localStorage)
+- [x] 49. Press & creator mentions wall
+- [x] 50. "Foodie Wall" — curated local customer photo grid
 
 ## Social & community (51–65) — Phase 7
 
 - [x] 51. Instagram feed section for @the_calcutta_classics (static curated grid linking out)
-- [ ] 52. UGC prompt: "Tag #CalcuttaClassics" with example posts
-- [ ] 53. Testimonials carousel with drag physics
-- [ ] 54. Google-review style rating strip (seeded data, real link TBD)
-- [ ] 55. Share any dish card to WhatsApp/X/IG-story (Web Share API + fallback)
-- [ ] 56. Combo Explorer badge system — visited/tried dishes checklist (localStorage honor system)
-- [ ] 57. Photo contest section with rules + monthly winner slot
-- [ ] 58. Newsletter capture form (localStorage queue now; Supabase later — flag-gated)
-- [ ] 59. Floating WhatsApp click-to-chat glass button
-- [ ] 60. "Call us" `tel:` CTA in nav + footer
-- [ ] 61. Table/visit request via prefilled WhatsApp message composer
-- [ ] 62. Catering/party inquiry form (mailto/WhatsApp compose — no backend)
-- [ ] 63. Feedback form with emoji scale + optional text
-- [ ] 64. "Vote the next menu item" poll (localStorage, animated results)
-- [ ] 65. Refer-a-friend: generates a shareable invite card image
+- [x] 52. UGC prompt: "Tag #CalcuttaClassics" with example posts
+- [x] 53. Testimonials carousel with drag physics
+- [x] 54. Google-review style rating strip (seeded data, real link TBD)
+- [x] 55. Share any dish card to WhatsApp/X/IG-story (Web Share API + fallback)
+- [x] 56. Combo Explorer badge system — visited/tried dishes checklist (localStorage honor system)
+- [x] 57. Photo contest section with rules + monthly winner slot
+- [x] 58. Newsletter capture form (localStorage queue now; Supabase later — flag-gated)
+- [x] 59. Floating WhatsApp click-to-chat glass button
+- [x] 60. "Call us" `tel:` CTA in nav + footer
+- [x] 61. Table/visit request via prefilled WhatsApp message composer
+- [x] 62. Catering/party inquiry form (mailto/WhatsApp compose — no backend)
+- [x] 63. Feedback form with emoji scale + optional text
+- [x] 64. "Vote the next menu item" poll (localStorage, animated results)
+- [x] 65. Refer-a-friend: generates a shareable invite card image
 
 ## Visual & interactive layer (66–85) — Phases 4 & 8
 
