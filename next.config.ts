@@ -14,7 +14,15 @@ const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "md", "mdx"],
   images: {
     formats: ["image/avif", "image/webp"],
-    ...(isGitHubPages && { unoptimized: true }),
+    // Every quality the app requests — silences the per-image warning.
+    qualities: [55, 70, 75],
+    // Pages has no optimizer: serve the pre-generated WebP variants
+    // (scripts/generate-static-variants.mjs) via a custom loader instead
+    // of shipping full-size JPEG masters.
+    ...(isGitHubPages && {
+      loader: "custom" as const,
+      loaderFile: "./lib/pages-image-loader.ts",
+    }),
   },
   ...(isGitHubPages && {
     output: "export" as const,
