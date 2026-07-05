@@ -56,7 +56,8 @@ export interface MenuItem {
 export interface ComboContent {
   label: string;
   qty: number;
-  unit?: "pcs" | "cups" | "plate";
+  /** Singular base unit — renderers pluralize by qty via `pluralize()`. */
+  unit?: "pc" | "cup" | "plate";
   /** Links back to an à la carte item when one exists (savings math). */
   itemSlug?: string;
 }

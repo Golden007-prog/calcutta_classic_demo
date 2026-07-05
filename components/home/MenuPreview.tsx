@@ -31,7 +31,7 @@ export function MenuPreview() {
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {bestsellers.map((item) => (
           <li key={item.slug}>
-            <Glass as="article" className="group flex h-full flex-col overflow-hidden">
+            <Glass as="article" interactive className="group flex h-full flex-col overflow-hidden">
               <div className="relative">
                 <DishImage
                   src={item.image}
@@ -40,7 +40,7 @@ export function MenuPreview() {
                   className="aspect-[4/3] w-full transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none"
                   sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 380px"
                 />
-                <span className="absolute left-3 top-3 rounded-full bg-momo-gold px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-charcoal">
+                <span className="absolute left-3 top-3 rounded-full bg-momo-gold px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-on-gold">
                   Bestseller
                 </span>
               </div>
@@ -67,7 +67,7 @@ export function MenuPreview() {
 
       <Link
         href="/menu"
-        className="tap-target mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-momo-gold px-6 py-3 text-sm font-semibold text-charcoal transition-colors hover:bg-momo-gold/90 sm:hidden"
+        className="tap-target mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-momo-gold px-6 py-3 text-sm font-semibold text-on-gold transition-colors hover:bg-momo-gold/90 sm:hidden"
       >
         See the full menu <ArrowRight size={16} aria-hidden />
       </Link>

@@ -77,6 +77,7 @@ export function Preloader() {
 
   useEffect(() => {
     if (document.documentElement.getAttribute("data-preload") !== "1") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot sync with the pre-paint sessionStorage gate; client-only by design
       setPhase("off"); // repeat visit — inline gate script already opted out
       return;
     }
@@ -193,7 +194,7 @@ export function Preloader() {
                 <span className="ml-0.5">%</span>
               </p>
 
-              <p className="text-[10px] uppercase tracking-[0.3em] text-cream/40">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-cream/65">
                 tap anywhere to skip
               </p>
             </>

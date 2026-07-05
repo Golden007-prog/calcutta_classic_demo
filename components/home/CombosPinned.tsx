@@ -55,11 +55,23 @@ export function CombosPinned({ combos }: { combos: Combo[] }) {
   }, []);
 
   return (
+    // Stable boundary div: ScrollTrigger's pin wraps the <section> in a
+    // pin-spacer (re-parenting it). React unmounts the route by removing
+    // ITS top-level children — if that were the section itself, its parent
+    // would no longer match and removeChild would throw, killing every
+    // soft navigation away from home. The wrapper keeps GSAP's DOM surgery
+    // out of React's removal path.
+    <div>
     <section
       ref={sectionRef}
       aria-labelledby="combos-heading"
-      className="overflow-hidden border-y border-line bg-surface/60 py-16"
+      className="relative overflow-hidden border-y border-line bg-surface/60 py-16"
     >
+      {/* A5.5 — vignette strips so scrubbing cards fade at the viewport
+          edge instead of hard-clipping mid-text. Overlays, not mask-image:
+          an ancestor mask would break the cards' backdrop-filter. */}
+      <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-16 bg-gradient-to-r from-background to-transparent lg:block" />
+      <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-16 bg-gradient-to-l from-background to-transparent lg:block" />
       <div className="mx-auto mb-8 flex max-w-6xl items-end justify-between gap-4 px-4 md:px-8">
         <div>
           <p className="text-xs uppercase tracking-[0.3em] text-soft">
@@ -90,5 +102,6 @@ export function CombosPinned({ combos }: { combos: Combo[] }) {
         </ul>
       </div>
     </section>
+    </div>
   );
 }

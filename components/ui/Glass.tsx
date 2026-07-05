@@ -4,11 +4,13 @@ import { cn } from "@/lib/utils";
 
 /**
  * The single glassmorphism primitive — spec §4.
- * One blur layer only: never nest a Glass inside another Glass.
+ * The visual recipe lives in globals.css (`.cc-glass`): smoked dark glass in
+ * BOTH themes (light text on dark surfaces only), with -webkit prefix and a
+ * solid @supports fallback. One blur layer only: never nest Glass in Glass.
  */
 const variants = {
   /** Full-width bars (navbar): square edges, bottom hairline. */
-  bar: "rounded-none border-x-0 border-t-0",
+  bar: "cc-glass-bar rounded-none border-x-0 border-t-0",
   /** Floating pill (mobile tab bar, chips). */
   pill: "rounded-full",
   /** Content cards over imagery. */
@@ -20,6 +22,11 @@ const variants = {
 type GlassOwnProps<T extends ElementType> = {
   as?: T;
   variant?: keyof typeof variants;
+  /**
+   * Interactive cards (links/buttons) share ONE hover + focus-visible
+   * treatment: gold border, slight lift, soft glow (feature parity, bug A5.2).
+   */
+  interactive?: boolean;
   className?: string;
 };
 
@@ -32,11 +39,13 @@ export function Glass<T extends ElementType = "div">(props: GlassProps<T>) {
   const {
     as,
     variant = "card",
+    interactive = false,
     className,
     ...rest
   } = props as {
     as?: ElementType;
     variant?: keyof typeof variants;
+    interactive?: boolean;
     className?: string;
   } & Record<string, unknown>;
   const Component = (as ?? "div") as ElementType<
@@ -46,10 +55,8 @@ export function Glass<T extends ElementType = "div">(props: GlassProps<T>) {
   return (
     <Component
       className={cn(
-        "border backdrop-blur-xl",
-        // light: milky glass over cream · dark: 8–12% white fill over charcoal
-        "border-black/10 bg-white/60 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.55),0_8px_28px_-12px_rgba(15,15,16,0.25)]",
-        "dark:border-white/15 dark:bg-white/10 dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.10),0_8px_28px_-12px_rgba(0,0,0,0.6)]",
+        "cc-glass border",
+        interactive && "cc-glass-interactive",
         variants[variant],
         className,
       )}

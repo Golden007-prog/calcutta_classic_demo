@@ -275,10 +275,10 @@ export const combos: Combo[] = [
     name: "Bhetki Fish Fry Combo",
     price: 249,
     contents: [
-      { label: "Bhetki Fish Fry", qty: 2, unit: "pcs", itemSlug: "bhetki-fish-fry" },
+      { label: "Bhetki Fish Fry", qty: 2, unit: "pc", itemSlug: "bhetki-fish-fry" },
       { label: "French Fries", qty: 1, unit: "plate", itemSlug: "french-fries" },
-      { label: "Momo", qty: 4, unit: "pcs", itemSlug: "steam-momo" },
-      { label: "Belgian Coffee", qty: 1, unit: "cups", itemSlug: "belgian-coffee" },
+      { label: "Momo", qty: 4, unit: "pc", itemSlug: "steam-momo" },
+      { label: "Belgian Coffee", qty: 1, unit: "cup", itemSlug: "belgian-coffee" },
     ],
     description:
       "The North Kolkata power lunch: shattering bhetki, hot fries, four momos and the ₹20 legend to finish.",
@@ -291,11 +291,11 @@ export const combos: Combo[] = [
     name: "Crispy Chicken Combo",
     price: 299,
     contents: [
-      { label: "Chicken Strips", qty: 3, unit: "pcs" },
-      { label: "Chicken Bombs", qty: 2, unit: "pcs", itemSlug: "cheese-chicken-bombs" },
+      { label: "Chicken Strips", qty: 3, unit: "pc" },
+      { label: "Chicken Bombs", qty: 2, unit: "pc", itemSlug: "cheese-chicken-bombs" },
       { label: "French Fries", qty: 1, unit: "plate", itemSlug: "french-fries" },
-      { label: "Momo", qty: 4, unit: "pcs", itemSlug: "steam-momo" },
-      { label: "Belgian Coffee", qty: 1, unit: "cups", itemSlug: "belgian-coffee" },
+      { label: "Momo", qty: 4, unit: "pc", itemSlug: "steam-momo" },
+      { label: "Belgian Coffee", qty: 1, unit: "cup", itemSlug: "belgian-coffee" },
     ],
     description:
       "Strips, bombs, fries, momos, coffee — a full crunch orchestra with a molten cheese solo.",
@@ -307,9 +307,9 @@ export const combos: Combo[] = [
     name: "Burger Combo",
     price: 159,
     contents: [
-      { label: "Momo Burger", qty: 2, unit: "pcs", itemSlug: "momo-burger" },
+      { label: "Momo Burger", qty: 2, unit: "pc", itemSlug: "momo-burger" },
       { label: "Fried Chips", qty: 1, unit: "plate", itemSlug: "french-fries" },
-      { label: "Belgian Coffee", qty: 2, unit: "cups", itemSlug: "belgian-coffee" },
+      { label: "Belgian Coffee", qty: 2, unit: "cup", itemSlug: "belgian-coffee" },
     ],
     description:
       "Two momo burgers, chips and coffees for two — a date plan that costs less than the auto ride.",
@@ -321,12 +321,12 @@ export const combos: Combo[] = [
     name: "Signature Meal Box",
     price: 349,
     contents: [
-      { label: "Fish Fry", qty: 2, unit: "pcs", itemSlug: "bhetki-fish-fry" },
+      { label: "Fish Fry", qty: 2, unit: "pc", itemSlug: "bhetki-fish-fry" },
       { label: "French Fries", qty: 1, unit: "plate", itemSlug: "french-fries" },
-      { label: "Chicken Strips", qty: 2, unit: "pcs" },
-      { label: "Chicken Bombs", qty: 2, unit: "pcs", itemSlug: "cheese-chicken-bombs" },
-      { label: "Momo", qty: 2, unit: "pcs", itemSlug: "steam-momo" },
-      { label: "Belgian Coffee", qty: 2, unit: "cups", itemSlug: "belgian-coffee" },
+      { label: "Chicken Strips", qty: 2, unit: "pc" },
+      { label: "Chicken Bombs", qty: 2, unit: "pc", itemSlug: "cheese-chicken-bombs" },
+      { label: "Momo", qty: 2, unit: "pc", itemSlug: "steam-momo" },
+      { label: "Belgian Coffee", qty: 2, unit: "cup", itemSlug: "belgian-coffee" },
     ],
     description:
       "Everything we're known for, packed into one box. Feeds two hungry humans or one absolute legend.",

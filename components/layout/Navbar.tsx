@@ -35,8 +35,8 @@ export function Navbar() {
         variant="bar"
         aria-label="Main"
         className={cn(
-          "flex items-center justify-between gap-4 px-4 transition-[height,background-color] duration-300 md:px-8 motion-reduce:transition-none",
-          condensed ? "h-12 dark:!bg-charcoal/70" : "h-16",
+          "flex items-center justify-between gap-4 px-4 transition-[height] duration-300 md:px-8 motion-reduce:transition-none",
+          condensed ? "h-12" : "h-16",
         )}
       >
         <Link

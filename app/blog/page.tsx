@@ -27,7 +27,7 @@ export default function BlogIndexPage() {
         <ul className="grid gap-4 md:grid-cols-3">
           {blogPosts.map((post) => (
             <li key={post.slug}>
-              <Glass as="article" className="group h-full overflow-hidden">
+              <Glass as="article" interactive className="group h-full overflow-hidden">
                 <Link href={`/blog/${post.slug}`} className="flex h-full flex-col">
                   <DishImage
                     src={post.image}

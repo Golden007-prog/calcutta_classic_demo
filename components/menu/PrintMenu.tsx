@@ -1,7 +1,7 @@
 import { combos, menuItems } from "@/data/menu";
 import { site } from "@/data/site";
 import { CATEGORY_LABELS, type Category } from "@/data/types";
-import { formatINR } from "@/lib/utils";
+import { formatINR, pluralize } from "@/lib/utils";
 
 const ORDER: Category[] = ["momos", "chaat-snacks", "fried-loaded", "beverages"];
 
@@ -56,7 +56,7 @@ export function PrintMenu() {
                   <strong>{combo.name}</strong>
                   <br />
                   <span style={{ fontSize: "9pt" }}>
-                    {combo.contents.map((c) => `${c.qty}${c.unit === "pcs" ? " pcs" : c.unit === "cups" ? " cups" : ""} ${c.label}`).join(", ")}
+                    {combo.contents.map((c) => `${c.qty}${c.unit ? ` ${pluralize(c.qty, c.unit)}` : ""} ${c.label}`).join(", ")}
                   </span>
                 </td>
                 <td style={{ textAlign: "right", verticalAlign: "top", whiteSpace: "nowrap" }}>

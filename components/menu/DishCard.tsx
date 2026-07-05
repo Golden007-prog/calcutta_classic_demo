@@ -28,6 +28,7 @@ export function DishCard({ item, nameRanges, className }: DishCardProps) {
     <Tilt>
     <Glass
       as="article"
+      interactive
       className={cn("group relative flex h-full flex-col overflow-hidden", className)}
     >
       <Link
@@ -45,7 +46,7 @@ export function DishCard({ item, nameRanges, className }: DishCardProps) {
           />
           <div className="absolute left-3 top-3 flex gap-2">
             {item.bestseller && (
-              <span className="rounded-full bg-momo-gold px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-charcoal">
+              <span className="rounded-full bg-momo-gold px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-on-gold">
                 Bestseller
               </span>
             )}

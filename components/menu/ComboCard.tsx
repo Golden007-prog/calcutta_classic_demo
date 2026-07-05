@@ -7,7 +7,7 @@ import { DishImage } from "@/components/ui/DishImage";
 import { Glass } from "@/components/ui/Glass";
 import type { Combo } from "@/data/types";
 import { comboSavings } from "@/lib/pricing";
-import { formatINR } from "@/lib/utils";
+import { formatINR, pluralize } from "@/lib/utils";
 
 /**
  * Features 8 + 9 — combo card with contents visualizer (each line animates
@@ -21,11 +21,8 @@ export function ComboCard({ combo }: { combo: Combo }) {
   const [savedDisplay, setSavedDisplay] = useState(0);
 
   useEffect(() => {
-    if (!inView || savings === null) return;
-    if (reduced) {
-      setSavedDisplay(savings);
-      return;
-    }
+    // reduced motion renders `savings` directly below — no animation state
+    if (!inView || savings === null || reduced) return;
     const controls = animate(0, savings, {
       duration: 1.2,
       delay: 0.4,
@@ -37,7 +34,7 @@ export function ComboCard({ combo }: { combo: Combo }) {
 
   return (
     <article ref={ref} className="h-full">
-    <Glass className="flex h-full flex-col overflow-hidden">
+    <Glass interactive className="flex h-full flex-col overflow-hidden">
       <DishImage
         src={combo.image}
         alt={`${combo.name} — ${combo.description}`}
@@ -65,7 +62,7 @@ export function ComboCard({ combo }: { combo: Combo }) {
               className="text-foreground/85"
             >
               <span className="font-semibold text-momo-gold">{content.qty}</span>{" "}
-              {content.unit === "plate" && content.qty === 1 ? "plate " : content.unit ? `${content.unit} ` : ""}
+              {content.unit ? `${pluralize(content.qty, content.unit)} ` : ""}
               {content.label}
             </motion.li>
           ))}
@@ -84,10 +81,10 @@ export function ComboCard({ combo }: { combo: Combo }) {
           </div>
           {savings !== null && savings > 0 && (
             <p
-              className="rounded-full bg-leaf/15 px-3 py-1.5 text-sm font-semibold text-leaf dark:text-leaf-soft"
+              className="rounded-full bg-leaf/20 px-3 py-1.5 text-sm font-semibold text-leaf-soft"
               aria-label={`You save ${formatINR(savings)}`}
             >
-              save {formatINR(savedDisplay)}
+              save {formatINR(reduced ? savings : savedDisplay)}
             </p>
           )}
         </div>

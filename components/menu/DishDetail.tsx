@@ -36,7 +36,7 @@ export function DishDetail({ item, inModal = false }: { item: MenuItem; inModal?
           <FavoriteButton slug={item.slug} name={item.name} className="absolute right-3 top-3" />
           <div className="absolute left-3 top-3 flex gap-2">
             {item.bestseller && (
-              <span className="rounded-full bg-momo-gold px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-charcoal">
+              <span className="rounded-full bg-momo-gold px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-on-gold">
                 Bestseller
               </span>
             )}
@@ -135,7 +135,7 @@ export function DishDetail({ item, inModal = false }: { item: MenuItem; inModal?
 
           {/* Pairs well with (feature 12) */}
           {pairing && (
-            <Glass as={Link} href={`/menu/${pairing.slug}`} className="group flex items-center gap-4 p-3">
+            <Glass as={Link} href={`/menu/${pairing.slug}`} interactive className="group flex items-center gap-4 p-3">
               <DishImage
                 src={pairing.image}
                 alt={pairing.name}

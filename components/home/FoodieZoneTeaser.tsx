@@ -41,7 +41,7 @@ export function FoodieZoneTeaser() {
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {teasers.map(({ icon: Icon, title, copy }) => (
           <li key={title}>
-            <Glass as={Link} href="/foodie-zone" className="group flex h-full flex-col gap-3 p-5 transition-colors hover:border-momo-gold/40">
+            <Glass as={Link} href="/foodie-zone" interactive className="group flex h-full flex-col gap-3 p-5">
               <Icon size={22} aria-hidden className="text-momo-gold" />
               <h3 className="font-display text-lg font-semibold group-hover:text-momo-gold">
                 {title}

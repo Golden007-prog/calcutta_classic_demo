@@ -26,11 +26,12 @@ export default function HomePage() {
       <section className="grain relative -mt-16 flex min-h-[100svh] items-center overflow-hidden pt-16">
         <HeroVideo />
 
-        {/* R3F momo floats over the right half on md+, tucked low on mobile */}
-        <HeroMomo className="pointer-events-none absolute bottom-0 right-0 z-[5] h-[38vh] w-[70vw] md:h-[70vh] md:w-[42vw]" />
+        {/* R3F momo hovers above the steamer basket — md+ only (A5.4):
+            on phones it fought the hero photo and cost a WebGL context. */}
+        <HeroMomo className="pointer-events-none absolute right-[3vw] top-[10vh] z-[5] hidden h-[54vh] w-[30vw] md:block" />
 
         <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-28 pt-16 md:px-8">
-          <Glass variant="panel" className="max-w-2xl space-y-6 !bg-charcoal/35 px-6 py-10 md:px-10 dark:!bg-white/5">
+          <Glass variant="panel" className="max-w-2xl space-y-6 px-6 py-10 md:px-10">
             <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-cream/70">
               <MapPin size={12} aria-hidden className="text-momo-gold" />
               Opposite Deshbandhu Park · Shyambazar
@@ -49,7 +50,7 @@ export default function HomePage() {
               <Magnetic>
                 <Link
                   href="/menu"
-                  className="tap-target inline-flex items-center gap-2 rounded-full bg-momo-gold px-6 py-3 text-sm font-semibold text-charcoal transition-colors hover:bg-momo-gold/90"
+                  className="tap-target inline-flex items-center gap-2 rounded-full bg-momo-gold px-6 py-3 text-sm font-semibold text-on-gold transition-colors hover:bg-momo-gold/90"
                 >
                   Explore the menu
                   <ArrowRight size={16} aria-hidden />
@@ -65,7 +66,7 @@ export default function HomePage() {
               </Magnetic>
             </div>
 
-            <p className="text-[11px] uppercase tracking-[0.3em] text-cream/50">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-cream/65">
               {site.brandLines.join("  ·  ")}
             </p>
           </Glass>

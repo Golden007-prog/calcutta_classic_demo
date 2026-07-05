@@ -1,52 +1,131 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "motion/react";
 import { useEffect, useState } from "react";
 
 /**
- * Feature 70 — tiny chili companion cursor, desktop only (fine pointer +
- * hover). The native cursor stays (accessibility); the chili trails it
- * with a spring and perks up over interactive elements.
+ * Feature 70 / bug A3 — the chili IS the cursor on desktop.
+ *
+ * - `pointermove` on window updates a plain target vector (never React
+ *   state); a single rAF loop lerps (~0.2) the rendered position and
+ *   writes `translate3d` directly — smooth trail, zero re-renders.
+ * - The native cursor is hidden via `html.cc-cursor-none` ONLY while this
+ *   component is mounted and active; the class is removed on unmount or
+ *   error, so there is never a cursorless (or double-cursor) state.
+ * - Strictly gated to `(pointer: fine) and (hover: hover)` and disabled
+ *   under `prefers-reduced-motion` — touch devices are never affected.
+ * - Scales up over interactive targets, squishes on press.
  */
+
+const INTERACTIVE =
+  "a, button, [role='button'], input, select, textarea, label, summary, [data-cursor='hover']";
+
 export function ChiliCursor() {
-  const [enabled, setEnabled] = useState(false);
-  const [hoveringAction, setHoveringAction] = useState(false);
-  const mx = useMotionValue(-100);
-  const my = useMotionValue(-100);
-  const x = useSpring(mx, { stiffness: 420, damping: 32, mass: 0.5 });
-  const y = useSpring(my, { stiffness: 420, damping: 32, mass: 0.5 });
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
-    const fine = window.matchMedia("(pointer: fine) and (hover: hover)").matches;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!fine || reduced) return;
-    setEnabled(true);
+    const fine = window.matchMedia("(pointer: fine) and (hover: hover)");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const decide = () => setActive(fine.matches && !reduced.matches);
+    decide();
+    fine.addEventListener("change", decide);
+    reduced.addEventListener("change", decide);
+    return () => {
+      fine.removeEventListener("change", decide);
+      reduced.removeEventListener("change", decide);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!active) return;
+
+    const el = document.getElementById("cc-chili-cursor");
+    if (!el) return;
+    const sprite = el.firstElementChild as HTMLElement | null;
+
+    const pos = { x: -100, y: -100 };
+    const target = { x: -100, y: -100 };
+    let scale = 1;
+    let targetScale = 1;
+    let pressed = false;
+    let hidden = true;
+    let raf = 0;
 
     const onMove = (e: PointerEvent) => {
-      mx.set(e.clientX + 14);
-      my.set(e.clientY + 10);
-      const target = e.target as HTMLElement;
-      setHoveringAction(Boolean(target.closest("a, button, [role='button'], input, select, textarea")));
+      target.x = e.clientX;
+      target.y = e.clientY;
+      if (hidden) {
+        // First contact: snap instead of flying in from off-screen.
+        pos.x = target.x;
+        pos.y = target.y;
+        hidden = false;
+        el.style.opacity = "1";
+      }
+      const t = e.target as HTMLElement | null;
+      targetScale = t?.closest?.(INTERACTIVE) ? 1.5 : 1;
     };
-    window.addEventListener("pointermove", onMove, { passive: true });
-    return () => window.removeEventListener("pointermove", onMove);
-  }, [mx, my]);
+    const onDown = () => {
+      pressed = true;
+    };
+    const onUp = () => {
+      pressed = false;
+    };
+    const onLeave = () => {
+      hidden = true;
+      el.style.opacity = "0";
+    };
 
-  if (!enabled) return null;
+    const loop = () => {
+      pos.x += (target.x - pos.x) * 0.2;
+      pos.y += (target.y - pos.y) * 0.2;
+      scale += ((pressed ? targetScale * 0.82 : targetScale) - scale) * 0.25;
+      el.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
+      if (sprite) sprite.style.transform = `translate(-50%, -50%) scale(${scale})`;
+      raf = requestAnimationFrame(loop);
+    };
+
+    try {
+      document.documentElement.classList.add("cc-cursor-none");
+      window.addEventListener("pointermove", onMove, { passive: true });
+      window.addEventListener("pointerdown", onDown, { passive: true });
+      window.addEventListener("pointerup", onUp, { passive: true });
+      document.documentElement.addEventListener("pointerleave", onLeave);
+      raf = requestAnimationFrame(loop);
+    } catch {
+      document.documentElement.classList.remove("cc-cursor-none");
+    }
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("pointerup", onUp);
+      document.documentElement.removeEventListener("pointerleave", onLeave);
+      document.documentElement.classList.remove("cc-cursor-none");
+    };
+  }, [active]);
+
+  if (!active) return null;
 
   return (
-    <motion.div
+    <div
+      id="cc-chili-cursor"
       aria-hidden
-      style={{ x, y }}
-      className="pointer-events-none fixed left-0 top-0 z-[95] select-none"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        opacity: 0,
+        pointerEvents: "none",
+        zIndex: 9999,
+        willChange: "transform",
+      }}
     >
-      <motion.span
-        animate={{ scale: hoveringAction ? 1.45 : 1, rotate: hoveringAction ? -18 : 0 }}
-        transition={{ type: "spring", stiffness: 380, damping: 22 }}
-        className="block text-base drop-shadow"
+      <span
+        className="block text-xl drop-shadow"
+        style={{ display: "block", transform: "translate(-50%, -50%)" }}
       >
         🌶️
-      </motion.span>
-    </motion.div>
+      </span>
+    </div>
   );
 }
