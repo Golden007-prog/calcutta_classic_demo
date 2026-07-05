@@ -122,6 +122,20 @@ body {
   animation: cc-fry-flip 1.4s cubic-bezier(0.45, 0, 0.2, 1) infinite;
 }
 
+/* Feature 29 — food-facts marquee (transform-only). */
+.cc-marquee {
+  animation: cc-marquee 42s linear infinite;
+}
+
+@keyframes cc-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @keyframes cc-fry-flip {
   0%,
   100% {

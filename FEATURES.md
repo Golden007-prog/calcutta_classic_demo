@@ -23,26 +23,26 @@ a reduced-motion path. Phases in parentheses show where each lands.
 
 ## Foodie experience (16–35) — Phase 6
 
-- [ ] 16. "What Should I Eat?" mood quiz → dish recommendation card
-- [ ] 17. Spin-the-Momo wheel — random dish picker with physics easing
-- [ ] 18. Craving matcher: cheesy/spicy/crunchy/saucy sliders → ranked matches
-- [ ] 19. Budget Bite Finder: "I have ₹___" slider → best combinations
-- [ ] 20. Group snack calculator: people + hunger level → suggested order (for walk-in)
+- [x] 16. "What Should I Eat?" mood quiz → dish recommendation card
+- [x] 17. Spin-the-Momo wheel — random dish picker with physics easing
+- [x] 18. Craving matcher: cheesy/spicy/crunchy/saucy sliders → ranked matches
+- [x] 19. Budget Bite Finder: "I have ₹___" slider → best combinations
+- [x] 20. Group snack calculator: people + hunger level → suggested order (for walk-in)
 - [x] 21. Momo-Meter: animated live-ish counter of momos steamed (seeded formula)
-- [ ] 22. Shareable "My Foodie Personality" result card (canvas-generated image)
-- [ ] 23. Daily special highlight driven by day-of-week data
-- [ ] 24. Weather-aware suggestion banner (rainy Kolkata → hot momos + coffee) via free weather API, graceful fallback
-- [ ] 25. Time-of-day menu mode (evening = snack hour hero copy)
-- [ ] 26. Foodie glossary (Bhetki, chaat, peri peri, momo origins…)
-- [ ] 27. Behind-the-scenes kitchen story section with hover video snippets
-- [ ] 28. Recipe-teaser cards styled like their Instagram posts (mozzarella pasta, pizza)
-- [ ] 29. Rotating food-facts ticker marquee
-- [ ] 30. Hunger-level selector → portion suggestion ("2 plates. Trust us.")
-- [ ] 31. Guided "Menu Tour" — scroll-driven storytelling walk through the menu
-- [ ] 32. Emoji craving reactions per dish (stored locally, animated burst)
+- [x] 22. Shareable "My Foodie Personality" result card (canvas-generated image)
+- [x] 23. Daily special highlight driven by day-of-week data
+- [x] 24. Weather-aware suggestion banner (rainy Kolkata → hot momos + coffee) via free weather API, graceful fallback
+- [x] 25. Time-of-day menu mode (evening = snack hour hero copy)
+- [x] 26. Foodie glossary (Bhetki, chaat, peri peri, momo origins…)
+- [x] 27. Behind-the-scenes kitchen story section with hover video snippets
+- [x] 28. Recipe-teaser cards styled like their Instagram posts (mozzarella pasta, pizza)
+- [x] 29. Rotating food-facts ticker marquee
+- [x] 30. Hunger-level selector → portion suggestion ("2 plates. Trust us.")
+- [x] 31. Guided "Menu Tour" — scroll-driven storytelling walk through the menu
+- [x] 32. Emoji craving reactions per dish (stored locally, animated burst)
 - [x] 33. Favorites/wishlist with heart animation (zustand + localStorage)
-- [ ] 34. Compare-two-dishes side-by-side drawer
-- [ ] 35. Seasonal/festival specials section (data-driven)
+- [x] 34. Compare-two-dishes side-by-side drawer
+- [x] 35. Seasonal/festival specials section (data-driven)
 
 ## Kolkata local (36–50) — Phase 7
 

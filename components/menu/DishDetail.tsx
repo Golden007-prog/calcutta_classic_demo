@@ -2,6 +2,7 @@ import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 import { FavoriteButton } from "@/components/menu/FavoriteButton";
+import { Reactions } from "@/components/menu/Reactions";
 import { ShareButton } from "@/components/menu/ShareButton";
 import { DishImage } from "@/components/ui/DishImage";
 import { Glass } from "@/components/ui/Glass";
@@ -158,6 +159,8 @@ export function DishDetail({ item, inModal = false }: { item: MenuItem; inModal?
               </div>
             </Glass>
           )}
+
+          <Reactions slug={item.slug} />
 
           <div className="mt-1 flex flex-wrap gap-3">
             <ShareButton
