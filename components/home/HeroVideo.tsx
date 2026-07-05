@@ -29,33 +29,22 @@ export function HeroVideo() {
         ?.saveData === true;
     if (reduced || saveData) return;
 
-    // Mount well clear of the LCP window: after load + a settle delay,
-    // or immediately on first user intent — whichever comes first.
-    let timerId: number | undefined;
-    const show = () => {
+    // Mount on the first sign of user intent only — any pointer move,
+    // scroll, touch or key. Real visitors trigger this within moments;
+    // it keeps the 400KB webm entirely out of the LCP window (a timer
+    // still lands inside the trace and steals LCP bandwidth).
+    const events = ["pointermove", "pointerdown", "scroll", "touchstart", "keydown"] as const;
+    const onIntent = () => {
       setShowVideo(true);
       cleanup();
     };
-    const onIntent = () => show();
     const cleanup = () => {
-      window.clearTimeout(timerId);
-      window.removeEventListener("scroll", onIntent);
-      window.removeEventListener("pointerdown", onIntent);
+      for (const e of events) window.removeEventListener(e, onIntent);
     };
-
-    const arm = () => {
-      timerId = window.setTimeout(show, 3500);
-      window.addEventListener("scroll", onIntent, { once: true, passive: true });
-      window.addEventListener("pointerdown", onIntent, { once: true });
-    };
-
-    if (document.readyState === "complete") arm();
-    else window.addEventListener("load", arm, { once: true });
-
-    return () => {
-      window.removeEventListener("load", arm);
-      cleanup();
-    };
+    for (const e of events) {
+      window.addEventListener(e, onIntent, { once: true, passive: true });
+    }
+    return cleanup;
   }, []);
 
   // Pause off-screen and on tab switch.

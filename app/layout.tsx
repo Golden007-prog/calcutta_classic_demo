@@ -1,9 +1,10 @@
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter, Noto_Serif_Bengali } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 
 import { AmbientGlow } from "@/components/fx/AmbientGlow";
+import { BengaliFontLoader } from "@/components/fx/BengaliFontLoader";
 import { ChiliCursor } from "@/components/fx/ChiliCursor";
 import { SmoothScroll } from "@/components/fx/SmoothScroll";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
@@ -33,15 +34,9 @@ const inter = Inter({
   display: "swap",
 });
 
-const notoBengali = Noto_Serif_Bengali({
-  subsets: ["bengali"],
-  variable: "--font-noto-bengali",
-  display: "swap",
-  weight: ["400", "600", "700"],
-  // One variable file serves all three weights; keep it off the
-  // critical path (accent words only).
-  preload: false,
-});
+// Noto Serif Bengali intentionally NOT via next/font — see
+// components/fx/BengaliFontLoader.tsx (loaded post-idle via FontFace API
+// so its 187KB never compete with the LCP image).
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -83,8 +78,8 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       // Font variables MUST live on <html>: Tailwind's @theme resolves
-      // --font-sans/--font-bengali at :root — on <body> they never apply.
-      className={`${fraunces.variable} ${inter.variable} ${notoBengali.variable}`}
+      // --font-sans/--font-display at :root — on <body> they never apply.
+      className={`${fraunces.variable} ${inter.variable}`}
     >
       <body className="font-sans antialiased">
         {/* Steam Ritual gate — runs before paint so repeat visitors never
@@ -103,6 +98,7 @@ export default function RootLayout({
             Skip to content
           </a>
           <AmbientGlow />
+          <BengaliFontLoader />
           <SmoothScroll />
           <ChiliCursor />
           <TopBarLoader />

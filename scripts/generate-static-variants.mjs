@@ -1,11 +1,13 @@
 /**
  * Static-export image variants (GitHub Pages has no next/image optimizer):
  *   public/images/<group>/<name>.jpg
- *     → public/images/opt/<group>/<name>-<w>.webp  (widths ≤ source, q70)
+ *     → public/images/opt/<group>/<name>-<w>.avif  (widths ≤ source)
  *
  * The Pages build (GITHUB_PAGES=true) swaps next/image to the custom
  * loader in lib/pages-image-loader.ts, which serves these files. The
  * variants are COMMITTED — CI has no raw masters to regenerate from.
+ * Buckets mirror next/image's device widths so mobile picks ~828, not
+ * an oversized bucket. AVIF ≈ 40% lighter than WebP at equal quality.
  *
  * Run after changing any image: node scripts/generate-static-variants.mjs
  */
@@ -16,8 +18,8 @@ import sharp from "sharp";
 const ROOT = path.resolve(import.meta.dirname, "..");
 const BASE = path.join(ROOT, "public", "images");
 const GROUPS = ["dishes", "combos", "hero", "mood", "textures"];
-export const WIDTHS = [384, 640, 960, 1280, 1920];
-const QUALITY = 70;
+export const WIDTHS = [384, 640, 828, 1080, 1440, 1920];
+const QUALITY = 55; // AVIF ~q55 ≈ WebP ~q75 visually
 
 let made = 0;
 for (const group of GROUPS) {
@@ -32,13 +34,13 @@ for (const group of GROUPS) {
     for (const w of WIDTHS) {
       // Buckets above the source width still get a file (capped at the
       // source, never upscaled) so the loader can never 404.
-      const out = path.join(outDir, `${stem}-${w}.webp`);
+      const out = path.join(outDir, `${stem}-${w}.avif`);
       const exists = await stat(out).catch(() => null);
       const srcStat = await stat(src);
       if (exists && exists.mtimeMs >= srcStat.mtimeMs) continue;
       await sharp(src)
         .resize({ width: Math.min(w, meta.width ?? w) })
-        .webp({ quality: QUALITY })
+        .avif({ quality: QUALITY })
         .toFile(out);
       made++;
     }

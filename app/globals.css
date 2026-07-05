@@ -18,7 +18,9 @@
   /* Type — wired to next/font variables in app/layout.tsx */
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-bengali: var(--font-noto-bengali), ui-serif, serif;
+  /* Loaded post-idle via the FontFace API (BengaliFontLoader) — the
+     name resolves once document.fonts has it; serif renders meanwhile. */
+  --font-bengali: "Noto Serif Bengali", ui-serif, serif;
 }
 
 /* Semantic tokens that flip with the theme (dark is the default). */
