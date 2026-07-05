@@ -24,9 +24,9 @@ const SESSION_KEY = "cc-steam-ritual";
 const MAX_MS = 2500;
 const MIN_MS = 900;
 
-/** Warmed while the ritual plays (feature 92). Poster lands in Phase 3. */
+/** Warmed while the ritual plays (feature 92). */
 const WARM_ASSETS = [
-  "/images/hero/momo-basket-poster.jpg",
+  "/images/hero/momo-basket.jpg",
   "/images/dishes/steam-momo.jpg",
   "/images/dishes/bhetki-fish-fry.jpg",
   "/images/dishes/momo-burger.jpg",

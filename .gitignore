@@ -31,3 +31,7 @@ pnpm-debug.log*
 
 # lighthouse
 .lighthouseci/
+
+# raw generated masters (regenerable — see IMAGE_PROMPTS.md)
+/public/images/raw/
+/public/video/raw/
