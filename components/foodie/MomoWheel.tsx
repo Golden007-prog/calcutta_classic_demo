@@ -87,6 +87,16 @@ export function MomoWheel() {
               const x2 = Math.cos(end) * 100;
               const y2 = Math.sin(end) * 100;
               const mid = (start + end) / 2;
+              // Labels run ALONG the radius (wheel-of-fortune style),
+              // anchored at the rim: 13 segments leave only ~30 units of
+              // tangential room at r=62, so tangential labels collided
+              // into an unreadable pile at the hub. Left-half labels flip
+              // 180° so nothing renders upside-down.
+              const midDeg = (mid * 180) / Math.PI;
+              const flip = midDeg > 90 && midDeg < 270;
+              const lx = Math.cos(mid) * 93;
+              const ly = Math.sin(mid) * 93;
+              const label = item.name.length > 15 ? item.name.slice(0, 14) + "…" : item.name;
               return (
                 <g key={item.slug}>
                   <path
@@ -97,15 +107,16 @@ export function MomoWheel() {
                     opacity={0.92}
                   />
                   <text
-                    x={Math.cos(mid) * 62}
-                    y={Math.sin(mid) * 62}
-                    fontSize="7"
+                    x={lx}
+                    y={ly}
+                    dy="2.6"
+                    fontSize="7.2"
                     fill="#0f0f10"
                     fontWeight="700"
-                    textAnchor="middle"
-                    transform={`rotate(${(mid * 180) / Math.PI + 90} ${Math.cos(mid) * 62} ${Math.sin(mid) * 62})`}
+                    textAnchor={flip ? "start" : "end"}
+                    transform={`rotate(${flip ? midDeg + 180 : midDeg} ${lx} ${ly})`}
                   >
-                    {item.name.length > 14 ? item.name.slice(0, 13) + "…" : item.name}
+                    {label}
                   </text>
                 </g>
               );
