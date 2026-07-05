@@ -1,5 +1,7 @@
 # The Calcutta Classics 🥟
 
+**Live: <https://golden007-prog.github.io/calcutta_classic_demo/>**
+
 A cinematic, mobile-first foodie showcase for **The Calcutta Classics** —
 street food made with love & spices in Shyambazar, Kolkata (opposite
 Deshbandhu Park). Instagram: [@the_calcutta_classics](https://www.instagram.com/the_calcutta_classics/).
@@ -57,6 +59,16 @@ Measured on the production build served locally via `next start`
 home LCP measures **2.7s**. Run it yourself:
 `pnpm build && pnpm start`, then
 `npx lighthouse http://localhost:3000 --output html`.
+
+## Deployments
+
+- **GitHub Pages** (live): pushed to `main` → `.github/workflows/deploy-pages.yml`
+  builds a static export (`GITHUB_PAGES=true`, basePath `/calcutta_classic_demo`).
+  Static-host trade-offs: no image optimizer, no dish-modal intercepting
+  route (links open the full dish page), no middleware.
+- **Vercel** (optional, full-featured): import the repo, set the env vars
+  from `.env.example` — image optimizer, dish modals and ISR come back
+  automatically, and Analytics/Speed Insights activate.
 
 ## Pending real-world facts (TBD)
 
