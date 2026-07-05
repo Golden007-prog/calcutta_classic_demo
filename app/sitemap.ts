@@ -4,6 +4,8 @@ import { blogPosts } from "@/data/blog";
 import { menuItems } from "@/data/menu";
 import { SITE_URL } from "@/lib/site-url";
 
+export const dynamic = "force-static";
+
 /** Feature 104 — sitemap over every static route, dish and post. */
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [

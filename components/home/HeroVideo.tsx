@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 import { generatedImages } from "@/data/images.generated";
+import { withBase } from "@/lib/asset";
 
 const POSTER = "/images/hero/video-poster.jpg";
 
@@ -91,7 +92,7 @@ export function HeroVideo() {
     <div ref={sectionRef} aria-hidden className="absolute inset-0 overflow-hidden">
       {poster && (
         <Image
-          src={POSTER}
+          src={withBase(POSTER)}
           alt=""
           fill
           priority
@@ -111,11 +112,11 @@ export function HeroVideo() {
           loop
           playsInline
           preload="none"
-          poster={POSTER}
+          poster={withBase(POSTER)}
           className="absolute inset-0 h-full w-full object-cover"
         >
-          <source src="/video/hero-steam.webm" type="video/webm" />
-          <source src="/video/hero-steam.mp4" type="video/mp4" />
+          <source src={withBase("/video/hero-steam.webm")} type="video/webm" />
+          <source src={withBase("/video/hero-steam.mp4")} type="video/mp4" />
         </video>
       )}
       {/* Contrast scrim for the glass panel + text */}

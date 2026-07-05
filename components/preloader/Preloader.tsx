@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { withBase } from "@/lib/asset";
 import { cn } from "@/lib/utils";
 
 /**
@@ -114,7 +115,7 @@ export function Preloader() {
         const link = document.createElement("link");
         link.rel = "prefetch";
         link.as = "image";
-        link.href = href;
+        link.href = withBase(href);
         document.head.appendChild(link);
       }
     }, 4000);

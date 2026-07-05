@@ -3,6 +3,8 @@ import { ImageResponse } from "next/og";
 import { getItem, menuItems } from "@/data/menu";
 
 /** Feature 103 — dynamic OG image per dish (name + price + veg dot). */
+export const dynamic = "force-static";
+
 export const alt = "Dish from The Calcutta Classics";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 import { generatedImages } from "@/data/images.generated";
+import { withBase } from "@/lib/asset";
 import { cn } from "@/lib/utils";
 
 /**
@@ -91,7 +92,7 @@ export function DishImage({
       )}
     >
       <Image
-        src={src}
+        src={withBase(src)}
         alt={alt}
         fill
         sizes={sizes}

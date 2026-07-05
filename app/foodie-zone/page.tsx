@@ -23,9 +23,6 @@ export const metadata: Metadata = {
     "Can't decide what to eat? Take the mood quiz, spin the momo wheel, match your cravings, or let the Budget Bite Finder plan your ₹150 like a strategist.",
 };
 
-/** Feature 95 — daily ISR for the specials sections. */
-export const revalidate = 86400;
-
 export default function FoodieZonePage() {
   return (
     <>

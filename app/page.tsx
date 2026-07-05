@@ -17,9 +17,8 @@ import { Glass } from "@/components/ui/Glass";
 import { combos } from "@/data/menu";
 import { site } from "@/data/site";
 
-/** Feature 95 — daily ISR so date-driven specials refresh server-side. */
-export const revalidate = 86400;
-
+// Date-driven sections (daily special, festivals) compute client-side, so
+// the page stays fully static — export-compatible for GitHub Pages.
 export default function HomePage() {
   return (
     <>

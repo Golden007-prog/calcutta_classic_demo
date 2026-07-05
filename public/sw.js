@@ -1,16 +1,19 @@
 /**
  * Feature 101 — offline support: "Menu works even on Metro Wi-Fi."
  * Network-first navigations with cache fallback (then /offline), plus
- * stale-while-revalidate for images and static assets.
+ * stale-while-revalidate for images and static assets. Base-path aware
+ * (works at / on Vercel and under /calcutta_classic_demo on github.io).
  */
-const CACHE = "cc-v1";
-const CORE = ["/", "/menu", "/combos", "/offline"];
+const CACHE = "cc-v2";
+const BASE = new URL(self.registration.scope).pathname.replace(/\/$/, "");
+const CORE = [`${BASE}/`, `${BASE}/menu/`, `${BASE}/combos/`, `${BASE}/offline/`, `${BASE}/menu`, `${BASE}/combos`, `${BASE}/offline`];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
       .open(CACHE)
-      .then((cache) => cache.addAll(CORE))
+      // Individual adds: a 308/404 on one path must not break install.
+      .then((cache) => Promise.allSettled(CORE.map((url) => cache.add(url))))
       .then(() => self.skipWaiting()),
   );
 });
@@ -39,18 +42,23 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE).then((cache) => cache.put(request, copy));
           return response;
         })
-        .catch(() =>
-          caches.match(request).then((cached) => cached ?? caches.match("/offline")),
-        ),
+        .catch(async () => {
+          const cached = await caches.match(request);
+          if (cached) return cached;
+          return (
+            (await caches.match(`${BASE}/offline/`)) ??
+            (await caches.match(`${BASE}/offline`))
+          );
+        }),
     );
     return;
   }
 
   // Images + static assets: stale-while-revalidate
   if (
-    url.pathname.startsWith("/images/") ||
-    url.pathname.startsWith("/_next/static/") ||
-    url.pathname.startsWith("/icons/")
+    url.pathname.startsWith(`${BASE}/images/`) ||
+    url.pathname.startsWith(`${BASE}/_next/static/`) ||
+    url.pathname.startsWith(`${BASE}/icons/`)
   ) {
     event.respondWith(
       caches.match(request).then((cached) => {

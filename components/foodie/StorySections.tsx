@@ -7,6 +7,7 @@ import { DishImage } from "@/components/ui/DishImage";
 import { Glass } from "@/components/ui/Glass";
 import { recipeTeasers } from "@/data/foodie";
 import { site } from "@/data/site";
+import { withBase } from "@/lib/asset";
 
 /* ── Feature 27: behind-the-scenes kitchen story w/ hover video ─── */
 
@@ -68,7 +69,7 @@ function KitchenCard({ beat }: { beat: (typeof KITCHEN_BEATS)[number] }) {
             loop
             playsInline
             preload="none"
-            src={beat.video}
+            src={withBase(beat.video)}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${hovering ? "opacity-100" : "opacity-0"}`}
             aria-hidden
           />
