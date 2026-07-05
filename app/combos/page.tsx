@@ -27,6 +27,9 @@ export default function CombosPage() {
       </header>
 
       <div className="mx-auto max-w-6xl px-4 pb-16 md:px-8">
+        {/* Card names are h3s (shared with the home rail) — keep the
+            heading ladder sequential for AT users. */}
+        <h2 className="sr-only">The four combos</h2>
         <ul className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 lg:mx-0 lg:grid lg:grid-cols-2 lg:overflow-visible lg:px-0">
           {combos.map((combo) => (
             <li key={combo.slug} className="w-[86vw] max-w-md shrink-0 snap-center lg:w-auto lg:max-w-none">
