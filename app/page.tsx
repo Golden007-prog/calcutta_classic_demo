@@ -1,7 +1,10 @@
 import { ArrowRight, MapPin } from "lucide-react";
 import Link from "next/link";
 
-import { CombosRail } from "@/components/home/CombosRail";
+import { DishMarquee, SteamDivider } from "@/components/fx/Dividers";
+import { Magnetic } from "@/components/fx/Magnetic";
+import { ParallaxBand } from "@/components/fx/ParallaxBand";
+import { CombosPinned } from "@/components/home/CombosPinned";
 import { FoodieZoneTeaser } from "@/components/home/FoodieZoneTeaser";
 import { HeroMomo } from "@/components/home/HeroMomo";
 import { HeroVideo } from "@/components/home/HeroVideo";
@@ -11,6 +14,7 @@ import { MenuPreview } from "@/components/home/MenuPreview";
 import { MomoMeter } from "@/components/home/MomoMeter";
 import { VisitBlock } from "@/components/home/VisitBlock";
 import { Glass } from "@/components/ui/Glass";
+import { combos } from "@/data/menu";
 import { site } from "@/data/site";
 
 export default function HomePage() {
@@ -40,19 +44,23 @@ export default function HomePage() {
             </p>
 
             <div className="flex flex-wrap items-center gap-3">
-              <Link
-                href="/menu"
-                className="tap-target inline-flex items-center gap-2 rounded-full bg-momo-gold px-6 py-3 text-sm font-semibold text-charcoal transition-colors hover:bg-momo-gold/90"
-              >
-                Explore the menu
-                <ArrowRight size={16} aria-hidden />
-              </Link>
-              <Link
-                href="/visit"
-                className="tap-target inline-flex items-center gap-2 rounded-full border border-cream/25 px-6 py-3 text-sm font-semibold text-cream transition-colors hover:border-momo-gold hover:text-momo-gold"
-              >
-                Find the shop
-              </Link>
+              <Magnetic>
+                <Link
+                  href="/menu"
+                  className="tap-target inline-flex items-center gap-2 rounded-full bg-momo-gold px-6 py-3 text-sm font-semibold text-charcoal transition-colors hover:bg-momo-gold/90"
+                >
+                  Explore the menu
+                  <ArrowRight size={16} aria-hidden />
+                </Link>
+              </Magnetic>
+              <Magnetic>
+                <Link
+                  href="/visit"
+                  className="tap-target inline-flex items-center gap-2 rounded-full border border-cream/25 px-6 py-3 text-sm font-semibold text-cream transition-colors hover:border-momo-gold hover:text-momo-gold"
+                >
+                  Find the shop
+                </Link>
+              </Magnetic>
             </div>
 
             <p className="text-[11px] uppercase tracking-[0.3em] text-cream/50">
@@ -67,9 +75,12 @@ export default function HomePage() {
         <MomoMeter />
       </section>
 
-      <CombosRail />
+      <CombosPinned combos={[...combos]} />
+      <DishMarquee />
       <MenuPreview />
+      <ParallaxBand />
       <FoodieZoneTeaser />
+      <SteamDivider />
       <InstagramWall />
       <VisitBlock />
     </>

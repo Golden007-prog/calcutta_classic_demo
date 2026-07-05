@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 import { generatedImages } from "@/data/images.generated";
 import { cn } from "@/lib/utils";
@@ -45,6 +48,8 @@ export function DishImage({
   transitionName,
 }: DishImageProps) {
   const entry = generatedImages[src];
+  // Feature 84 — branded shimmer behind every image until it paints.
+  const [loaded, setLoaded] = useState(false);
 
   const style = transitionName
     ? ({ viewTransitionName: transitionName } as React.CSSProperties)
@@ -77,7 +82,14 @@ export function DishImage({
   }
 
   return (
-    <div style={style} className={cn("relative overflow-hidden", className)}>
+    <div
+      style={style}
+      className={cn(
+        "relative overflow-hidden",
+        !loaded && "shimmer bg-foreground/[0.06]",
+        className,
+      )}
+    >
       <Image
         src={src}
         alt={alt}
@@ -87,6 +99,7 @@ export function DishImage({
         fetchPriority={priority ? "high" : undefined}
         placeholder="blur"
         blurDataURL={entry.blurDataURL}
+        onLoad={() => setLoaded(true)}
         className="object-cover"
       />
     </div>

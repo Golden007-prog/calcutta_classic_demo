@@ -4,6 +4,7 @@ import Link from "next/link";
 import { CallButton } from "@/components/layout/CallButton";
 import { NewsletterForm } from "@/components/NewsletterForm";
 import { OpenBadge } from "@/components/OpenBadge";
+import { SoundToggle } from "@/components/SoundToggle";
 import { InstagramIcon } from "@/components/ui/icons";
 import { VegDot } from "@/components/ui/VegDot";
 import { WeatherWidget } from "@/components/WeatherBanner";
@@ -92,6 +93,7 @@ export function Footer() {
             Shyambazar way.
           </p>
           <NewsletterForm />
+          <SoundToggle />
         </div>
       </div>
 

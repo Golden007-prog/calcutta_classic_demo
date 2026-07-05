@@ -122,9 +122,54 @@ body {
   animation: cc-fry-flip 1.4s cubic-bezier(0.45, 0, 0.2, 1) infinite;
 }
 
-/* Feature 29 — food-facts marquee (transform-only). */
+/* Feature 29/78 — marquee strips (transform-only). */
 .cc-marquee {
   animation: cc-marquee 42s linear infinite;
+}
+
+/* Feature 81 — steam curls drifting inside section dividers. */
+.cc-steam-drift {
+  animation: cc-steam-drift 3.2s ease-in-out infinite;
+}
+
+@keyframes cc-steam-drift {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(-6px);
+    opacity: 0.85;
+  }
+}
+
+/* Feature 108 — the 404 momo rolls away. */
+.cc-roll {
+  animation: cc-roll 3.4s cubic-bezier(0.4, 0, 0.4, 1) infinite;
+  display: inline-block;
+}
+
+@keyframes cc-roll {
+  0% {
+    transform: translateX(-70px) rotate(-160deg);
+  }
+  55%,
+  70% {
+    transform: translateX(12px) rotate(20deg);
+  }
+  100% {
+    transform: translateX(90px) rotate(200deg);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-marquee,
+  .cc-steam-drift,
+  .cc-roll {
+    animation: none;
+  }
 }
 
 @keyframes cc-marquee {

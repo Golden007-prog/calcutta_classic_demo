@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, Noto_Serif_Bengali } from "next/font/google";
 
+import { ChiliCursor } from "@/components/fx/ChiliCursor";
+import { SmoothScroll } from "@/components/fx/SmoothScroll";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { BottomTabBar } from "@/components/layout/BottomTabBar";
 import { Footer } from "@/components/layout/Footer";
@@ -80,6 +82,8 @@ export default function RootLayout({
           >
             Skip to content
           </a>
+          <SmoothScroll />
+          <ChiliCursor />
           <TopBarLoader />
           <Preloader />
           <Navbar />

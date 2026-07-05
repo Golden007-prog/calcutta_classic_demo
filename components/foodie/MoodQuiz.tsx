@@ -8,6 +8,7 @@ import { DishImage } from "@/components/ui/DishImage";
 import { Glass } from "@/components/ui/Glass";
 import { site } from "@/data/site";
 import type { MenuItem } from "@/data/types";
+import { burst } from "@/lib/burst";
 import { rankItems, type Traits } from "@/lib/recommend";
 import { formatINR } from "@/lib/utils";
 
@@ -97,6 +98,12 @@ export function MoodQuiz() {
     setAnswers(next);
     setResult({ item: top, personality });
     drawCard(personality, top);
+    if (canvasRef.current?.parentElement) {
+      burst(canvasRef.current.parentElement, {
+        emojis: [personality.emoji, "✨"],
+        count: 12,
+      });
+    }
   };
 
   /** Feature 22 — canvas-generated shareable card. */

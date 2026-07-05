@@ -7,7 +7,9 @@ import Link from "next/link";
 import { Glass } from "@/components/ui/Glass";
 import { menuItems } from "@/data/menu";
 import type { MenuItem } from "@/data/types";
+import { burst } from "@/lib/burst";
 import { formatINR } from "@/lib/utils";
+import { playSizzle } from "@/stores/sound";
 
 /**
  * Feature 17 — Spin-the-Momo wheel with physics easing.
@@ -31,6 +33,7 @@ export function MomoWheel() {
     if (spinning) return;
     setSpinning(true);
     setWinner(null);
+    playSizzle(); // feature 85 — off unless enabled in the footer
 
     const targetIndex = Math.floor(Math.random() * count);
     // Land the middle of the target segment under the top pointer.
@@ -51,6 +54,12 @@ export function MomoWheel() {
       onComplete: () => {
         setSpinning(false);
         setWinner(menuItems[targetIndex]);
+        if (wheelRef.current) {
+          burst(wheelRef.current.closest("svg") as unknown as HTMLElement, {
+            emojis: ["🥟", "✨", "🌶️"],
+            count: 14,
+          });
+        }
       },
     });
     return () => controls.stop();

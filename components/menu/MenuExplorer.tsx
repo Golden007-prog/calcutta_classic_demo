@@ -4,6 +4,7 @@ import { Printer, Search, X } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { CategoryIcon } from "@/components/menu/CategoryIcon";
 import { ComboCard } from "@/components/menu/ComboCard";
 import { DishCard } from "@/components/menu/DishCard";
 import { Glass } from "@/components/ui/Glass";
@@ -252,7 +253,10 @@ export function MenuExplorer({ items, combos }: { items: MenuItem[]; combos: Com
                         transition={{ type: "spring", stiffness: 380, damping: 32 }}
                       />
                     )}
-                    <span className={cn("relative", lang === "bn" && "font-bengali")}>{label(id)}</span>
+                    <span className={cn("relative inline-flex items-center gap-1.5", lang === "bn" && "font-bengali")}>
+                      <CategoryIcon category={id} active={active === id} />
+                      {label(id)}
+                    </span>
                   </button>
                 ))}
               </div>

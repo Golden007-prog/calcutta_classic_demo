@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 
+import { Tilt } from "@/components/fx/Tilt";
 import { FavoriteButton } from "@/components/menu/FavoriteButton";
 import { DishImage } from "@/components/ui/DishImage";
 import { Glass } from "@/components/ui/Glass";
@@ -24,6 +25,7 @@ export function DishCard({ item, nameRanges, className }: DishCardProps) {
   const lang = useLang((s) => s.lang);
 
   return (
+    <Tilt>
     <Glass
       as="article"
       className={cn("group relative flex h-full flex-col overflow-hidden", className)}
@@ -103,5 +105,6 @@ export function DishCard({ item, nameRanges, className }: DishCardProps) {
         className="absolute right-3 top-3"
       />
     </Glass>
+    </Tilt>
   );
 }

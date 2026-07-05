@@ -8,8 +8,8 @@ export default function NotFound() {
   return (
     <section className="mx-auto flex max-w-3xl flex-col items-center px-4 py-24 text-center">
       <Glass variant="panel" className="grain relative w-full space-y-5 overflow-hidden px-6 py-16">
-        <p aria-hidden className="font-display text-7xl">
-          🥟
+        <p aria-hidden className="overflow-hidden font-display text-7xl">
+          <span className="cc-roll">🥟</span>
         </p>
         <h1 className="font-display text-4xl font-semibold">
           This page rolled away

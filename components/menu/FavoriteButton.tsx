@@ -4,8 +4,10 @@ import { Heart } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 
-import { useFavorites } from "@/stores/favorites";
+import { burst } from "@/lib/burst";
 import { cn } from "@/lib/utils";
+import { useFavorites } from "@/stores/favorites";
+import { playPop } from "@/stores/sound";
 
 /**
  * Feature 33 — heart with a spring pop (particle burst joins in Phase 8).
@@ -35,7 +37,12 @@ export function FavoriteButton({
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
+        const wasFavorite = slugs.includes(slug);
         toggle(slug);
+        if (!wasFavorite) {
+          burst(e.currentTarget, { emojis: ["❤️", "✨"], count: 9 });
+          playPop();
+        }
       }}
       whileTap={reduced ? undefined : { scale: 0.8 }}
       animate={isFavorite && !reduced ? { scale: [1, 1.35, 1] } : undefined}

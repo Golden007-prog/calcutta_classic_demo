@@ -85,23 +85,23 @@ a reduced-motion path. Phases in parentheses show where each lands.
 - [x] 66. R3F hero: floating 3D momo (primitives/lathe — no heavy GLB) with slow idle rotation, mouse parallax
 - [x] 67. GPU steam particles rising through the hero
 - [x] 68. Hero video background under a glass info panel
-- [ ] 69. Glass navbar that condenses on scroll
-- [ ] 70. Chili custom cursor + hover states (desktop only)
-- [ ] 71. Magnetic buttons with spring physics
-- [ ] 72. Multi-layer parallax food imagery between sections
-- [ ] 73. GSAP ScrollTrigger reveals: clip-path unmasks, staggered text, image scale-settle
-- [ ] 74. Lenis smooth scroll wired into ScrollTrigger
-- [ ] 75. Horizontal pinned scroll section for Signature Combos
-- [ ] 76. 3D perspective tilt on dish cards (pointer-tracked, springy)
+- [x] 69. Glass navbar that condenses on scroll
+- [x] 70. Chili custom cursor + hover states (desktop only)
+- [x] 71. Magnetic buttons with spring physics
+- [x] 72. Multi-layer parallax food imagery between sections
+- [x] 73. GSAP ScrollTrigger reveals: clip-path unmasks, staggered text, image scale-settle
+- [x] 74. Lenis smooth scroll wired into ScrollTrigger
+- [x] 75. Horizontal pinned scroll section for Signature Combos
+- [x] 76. 3D perspective tilt on dish cards (pointer-tracked, springy)
 - [x] 77. Kinetic typography hero headline (per-word stagger, Bengali accent word)
-- [ ] 78. Dish-name marquee divider strips
+- [x] 78. Dish-name marquee divider strips
 - [x] 79. View Transitions API page morphs (dish card → dish page image morph)
-- [ ] 80. Dark/light mode with animated sun/steam toggle (dark default)
-- [ ] 81. Animated SVG steam-curve section dividers
-- [ ] 82. Particle burst micro-interactions (favorite, quiz result, wheel win)
-- [ ] 83. Lottie/light SVG animated icons for categories
-- [ ] 84. Branded skeleton shimmer for every image while loading
-- [ ] 85. Optional subtle UI sounds (sizzle on wheel spin) — OFF by default, toggle in footer
+- [x] 80. Dark/light mode with animated sun/steam toggle (dark default)
+- [x] 81. Animated SVG steam-curve section dividers
+- [x] 82. Particle burst micro-interactions (favorite, quiz result, wheel win)
+- [x] 83. Lottie/light SVG animated icons for categories
+- [x] 84. Branded skeleton shimmer for every image while loading
+- [x] 85. Optional subtle UI sounds (sizzle on wheel spin) — OFF by default, toggle in footer
 
 ## Signature loading system (86–92) — Phase 2
 
