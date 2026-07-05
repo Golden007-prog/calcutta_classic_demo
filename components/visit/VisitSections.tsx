@@ -31,7 +31,7 @@ export function MapEmbed() {
         href={site.location.mapsUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="tap-target absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-momo-gold px-5 py-2.5 text-sm font-semibold text-charcoal shadow-lg hover:bg-momo-gold/90"
+        className="tap-target absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-momo-gold px-5 py-2.5 text-sm font-semibold text-on-gold shadow-lg hover:bg-momo-gold/90"
       >
         <Navigation size={15} aria-hidden />
         Get directions
@@ -136,7 +136,7 @@ export function DistanceCheck() {
           <button
             type="button"
             onClick={locate}
-            className="tap-target self-start rounded-full bg-momo-gold px-5 py-2.5 text-sm font-semibold text-charcoal hover:bg-momo-gold/90"
+            className="tap-target self-start rounded-full bg-momo-gold px-5 py-2.5 text-sm font-semibold text-on-gold hover:bg-momo-gold/90"
           >
             Check my distance
           </button>

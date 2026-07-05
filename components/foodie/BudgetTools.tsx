@@ -48,7 +48,7 @@ export function BudgetFinder() {
                   <span>
                     <span className="font-semibold text-momo-gold">{pick.qty} ×</span> {pick.label}
                     {pick.isCombo && (
-                      <span className="ml-2 rounded-full bg-leaf/15 px-2 py-0.5 text-[11px] font-semibold text-leaf dark:text-leaf-soft">
+                      <span className="ml-2 rounded-full bg-leaf/20 px-2 py-0.5 text-[11px] font-semibold text-leaf-soft">
                         combo value
                       </span>
                     )}
@@ -118,7 +118,7 @@ export function GroupCalculator() {
               aria-pressed={hunger === option.value}
               className={`tap-target flex-1 rounded-full border px-3 py-2 text-sm transition-colors ${
                 hunger === option.value
-                  ? "border-momo-gold bg-momo-gold/15 text-momo-gold"
+                  ? "border-momo-gold bg-momo-gold/20 font-semibold text-foreground"
                   : "border-line text-foreground/75 hover:border-momo-gold/50"
               }`}
             >

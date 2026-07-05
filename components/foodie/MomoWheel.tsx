@@ -120,7 +120,7 @@ export function MomoWheel() {
         type="button"
         onClick={spin}
         disabled={spinning}
-        className="tap-target mt-6 inline-flex items-center gap-2 rounded-full bg-momo-gold px-8 py-3 text-sm font-semibold text-charcoal transition-colors hover:bg-momo-gold/90 disabled:cursor-wait disabled:opacity-60"
+        className="tap-target mt-6 inline-flex items-center gap-2 rounded-full bg-momo-gold px-8 py-3 text-sm font-semibold text-on-gold transition-colors hover:bg-momo-gold/90 disabled:cursor-wait disabled:opacity-60"
       >
         {spinning ? "Steaming the odds…" : winner ? "Spin again" : "Spin the wheel"}
       </button>

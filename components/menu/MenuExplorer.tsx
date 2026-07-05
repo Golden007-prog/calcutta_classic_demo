@@ -243,7 +243,7 @@ export function MenuExplorer({ items, combos }: { items: MenuItem[]; combos: Com
                     aria-current={active === id ? "true" : undefined}
                     className={cn(
                       "tap-target relative shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors",
-                      active === id ? "text-charcoal" : "text-foreground/75 hover:text-momo-gold",
+                      active === id ? "text-on-gold" : "text-foreground/75 hover:text-momo-gold",
                     )}
                   >
                     {active === id && (

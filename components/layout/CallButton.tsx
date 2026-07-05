@@ -18,7 +18,7 @@ export function CallButton({ className }: { className?: string }) {
       <span
         title="Phone number coming soon"
         aria-disabled="true"
-        className={cn(base, "cursor-not-allowed bg-momo-gold/40 text-charcoal/70")}
+        className={cn(base, "cursor-not-allowed border border-momo-gold/40 bg-momo-gold/15 text-foreground/75")}
       >
         <Phone size={16} aria-hidden />
         Call us
@@ -29,7 +29,7 @@ export function CallButton({ className }: { className?: string }) {
   return (
     <a
       href={`tel:${site.contact.phone}`}
-      className={cn(base, "bg-momo-gold text-charcoal hover:bg-momo-gold/90")}
+      className={cn(base, "bg-momo-gold text-on-gold hover:bg-momo-gold/90")}
     >
       <Phone size={16} aria-hidden />
       Call us

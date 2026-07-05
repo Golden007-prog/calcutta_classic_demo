@@ -1,19 +1,18 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
+import { useMounted } from "@/lib/use-mounted";
 import { REACTION_EMOJIS, seededCount, useReactions, type ReactionEmoji } from "@/stores/reactions";
 
 /** Feature 32 — emoji craving reactions with a pop (burst upgrade in P8). */
 export function Reactions({ slug }: { slug: string }) {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const mine = useReactions((s) => s.mine[slug]);
   const react = useReactions((s) => s.react);
   const [justTapped, setJustTapped] = useState<ReactionEmoji | null>(null);
   const reduced = useReducedMotion();
-
-  useEffect(() => setMounted(true), []);
 
   return (
     <div role="group" aria-label="React to this dish" className="flex flex-wrap gap-2">

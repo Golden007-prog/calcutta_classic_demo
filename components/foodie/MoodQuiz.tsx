@@ -255,7 +255,7 @@ export function MoodQuiz() {
                 <a
                   href={cardUrl}
                   download="my-foodie-personality.png"
-                  className="tap-target inline-flex items-center gap-2 rounded-full bg-momo-gold px-5 py-2.5 text-sm font-semibold text-charcoal hover:bg-momo-gold/90"
+                  className="tap-target inline-flex items-center gap-2 rounded-full bg-momo-gold px-5 py-2.5 text-sm font-semibold text-on-gold hover:bg-momo-gold/90"
                 >
                   <Download size={15} aria-hidden /> Save my card
                 </a>

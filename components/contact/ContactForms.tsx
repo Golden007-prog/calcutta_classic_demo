@@ -84,7 +84,7 @@ export function VisitComposer() {
       <button
         type="button"
         onClick={() => send(message)}
-        className="tap-target mt-4 inline-flex items-center gap-2 rounded-full bg-momo-gold px-6 py-3 text-sm font-semibold text-charcoal hover:bg-momo-gold/90"
+        className="tap-target mt-4 inline-flex items-center gap-2 rounded-full bg-momo-gold px-6 py-3 text-sm font-semibold text-on-gold hover:bg-momo-gold/90"
       >
         {copied ? <Check size={15} aria-hidden /> : <Send size={15} aria-hidden />}
         {hasWhatsApp ? "Send on WhatsApp" : copied ? "Copied — paste it when we get WhatsApp!" : "Copy message"}
@@ -159,7 +159,7 @@ export function CateringInquiry() {
       <button
         type="button"
         onClick={() => send(message)}
-        className="tap-target mt-4 inline-flex items-center gap-2 rounded-full bg-momo-gold px-6 py-3 text-sm font-semibold text-charcoal hover:bg-momo-gold/90"
+        className="tap-target mt-4 inline-flex items-center gap-2 rounded-full bg-momo-gold px-6 py-3 text-sm font-semibold text-on-gold hover:bg-momo-gold/90"
       >
         {copied ? <Check size={15} aria-hidden /> : <Send size={15} aria-hidden />}
         {hasWhatsApp ? "Send inquiry" : copied ? "Copied!" : "Copy inquiry"}
@@ -242,7 +242,7 @@ export function FeedbackForm() {
         type="button"
         onClick={submit}
         disabled={mood === null}
-        className="tap-target mt-3 inline-flex items-center gap-2 rounded-full bg-momo-gold px-6 py-3 text-sm font-semibold text-charcoal hover:bg-momo-gold/90 disabled:cursor-not-allowed disabled:opacity-50"
+        className="tap-target mt-3 inline-flex items-center gap-2 rounded-full bg-momo-gold px-6 py-3 text-sm font-semibold text-on-gold hover:bg-momo-gold/90 disabled:cursor-not-allowed disabled:opacity-50"
       >
         <Send size={15} aria-hidden />
         Send feedback

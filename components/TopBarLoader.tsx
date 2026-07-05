@@ -44,6 +44,7 @@ export function TopBarLoader() {
 
   // Route changed → finish the bar.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- synchronizing with the router (external system): the bar must flip to "done" the moment pathname changes
     setState((s) => (s === "loading" ? "done" : s));
     const t = window.setTimeout(() => setState("idle"), 350);
     return () => window.clearTimeout(t);

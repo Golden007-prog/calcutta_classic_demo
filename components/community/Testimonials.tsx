@@ -32,7 +32,7 @@ export function Testimonials() {
           {testimonials.map((t) => (
             <li key={t.name} className="w-[300px] shrink-0">
               <Glass as="figure" className="flex h-full flex-col gap-3 p-5">
-                <div className="flex gap-0.5" aria-label={`${t.rating} out of 5 stars`}>
+                <div className="flex gap-0.5" role="img" aria-label={`${t.rating} out of 5 stars`}>
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star
                       key={i}
@@ -72,7 +72,7 @@ export function RatingStrip() {
           {ratingSummary.average}
         </p>
         <div>
-          <div className="flex gap-0.5" aria-label={`${ratingSummary.average} out of 5 stars average`}>
+          <div className="flex gap-0.5" role="img" aria-label={`${ratingSummary.average} out of 5 stars average`}>
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
                 key={i}

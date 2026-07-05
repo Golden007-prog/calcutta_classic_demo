@@ -31,6 +31,7 @@ const DAYPART_COPY: Record<Daypart, { icon: typeof Sun; line: string }> = {
 
 export function DaypartBadge() {
   const [daypart, setDaypart] = useState<Daypart | null>(null);
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot: IST time only exists meaningfully on the client; SSR renders nothing
   useEffect(() => setDaypart(istDaypart()), []);
   if (!daypart) return null;
   const { icon: Icon, line } = DAYPART_COPY[daypart];
@@ -49,6 +50,7 @@ export function DailySpecial() {
   useEffect(() => {
     const now = new Date();
     const istDay = new Date(now.getTime() + 330 * 60000).getUTCDay();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot: date-driven content computes client-side so the page stays fully static
     setDay(istDay);
   }, []);
 
@@ -96,6 +98,7 @@ function activeFestival(date = new Date()) {
 
 export function SeasonalSpecial() {
   const [festival, setFestival] = useState<ReturnType<typeof activeFestival> | null>(null);
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot: festival windows are date-driven and compute client-side (page stays static)
   useEffect(() => setFestival(activeFestival() ?? undefined), []);
   if (!festival) return null;
   const item = getItem(festival.slug);

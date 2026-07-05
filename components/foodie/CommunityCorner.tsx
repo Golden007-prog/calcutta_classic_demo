@@ -8,6 +8,8 @@ import { Glass } from "@/components/ui/Glass";
 import { pollOptions, seededVotes, type PollOptionId } from "@/data/community";
 import { menuItems } from "@/data/menu";
 import { site } from "@/data/site";
+import { useMounted } from "@/lib/use-mounted";
+import { pluralize } from "@/lib/utils";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -39,10 +41,9 @@ const BADGES = [
 ];
 
 export function BadgeBoard() {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const tried = useTried((s) => s.tried);
   const toggle = useTried((s) => s.toggle);
-  useEffect(() => setMounted(true), []);
 
   const count = mounted ? tried.length : 0;
 
@@ -68,7 +69,7 @@ export function BadgeBoard() {
               aria-pressed={done}
               className={`tap-target inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-sm transition-colors ${
                 done
-                  ? "border-leaf bg-leaf/15 text-leaf dark:text-leaf-soft"
+                  ? "border-leaf bg-leaf/20 text-leaf-soft"
                   : "border-line text-foreground/75 hover:border-momo-gold/50"
               }`}
             >
@@ -85,14 +86,16 @@ export function BadgeBoard() {
           return (
             <li
               key={badge.name}
-              className={`rounded-2xl border p-3 text-center transition-opacity ${
-                earned ? "border-momo-gold bg-momo-gold/10" : "border-line opacity-50"
+              className={`rounded-2xl border p-3 text-center ${
+                earned ? "border-momo-gold bg-momo-gold/10" : "border-line grayscale"
               }`}
-              aria-label={`${badge.name}: ${earned ? "earned" : `try ${badge.need} dishes`}`}
+              aria-label={`${badge.name}: ${earned ? "earned" : `try ${pluralize(badge.need, "dish", "dishes")}`}`}
             >
               <p className="text-2xl" aria-hidden>{badge.emoji}</p>
               <p className="mt-1 text-xs font-semibold">{badge.name}</p>
-              <p className="text-[10px] text-soft">{earned ? "earned!" : `${badge.need} dishes`}</p>
+              <p className="text-[10px] text-soft">
+                {earned ? "earned!" : `${badge.need} ${pluralize(badge.need, "dish", "dishes")}`}
+              </p>
             </li>
           );
         })}
@@ -105,13 +108,13 @@ export function BadgeBoard() {
 
 export function NextItemPoll() {
   const [voted, setVoted] = useState<PollOptionId | null>(null);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const reduced = useReducedMotion();
 
   useEffect(() => {
-    setMounted(true);
     try {
       const stored = localStorage.getItem("cc-poll-vote") as PollOptionId | null;
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot restore of the persisted vote; localStorage only exists on the client
       if (stored) setVoted(stored);
     } catch {
       /* ignore */
@@ -259,7 +262,7 @@ export function ReferCard() {
         <button
           type="button"
           onClick={generate}
-          className="tap-target inline-flex items-center gap-2 rounded-full bg-momo-gold px-5 py-2.5 text-sm font-semibold text-charcoal hover:bg-momo-gold/90"
+          className="tap-target inline-flex items-center gap-2 rounded-full bg-momo-gold px-5 py-2.5 text-sm font-semibold text-on-gold hover:bg-momo-gold/90"
         >
           <Award size={15} aria-hidden />
           Make my card

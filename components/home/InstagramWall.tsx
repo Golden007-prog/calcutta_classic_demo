@@ -21,7 +21,7 @@ export function InstagramWall() {
             href={site.instagram.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="tap-target inline-flex items-center gap-2 rounded-full bg-momo-gold px-5 py-2.5 text-sm font-semibold text-charcoal transition-colors hover:bg-momo-gold/90"
+            className="tap-target inline-flex items-center gap-2 rounded-full bg-momo-gold px-5 py-2.5 text-sm font-semibold text-on-gold transition-colors hover:bg-momo-gold/90"
           >
             <InstagramIcon size={16} />
             Follow the steam

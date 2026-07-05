@@ -38,12 +38,13 @@ export function Footer() {
           <p className="text-sm font-semibold uppercase tracking-wider text-soft">
             Explore
           </p>
-          <ul className="space-y-2 text-sm">
+          <ul className="text-sm">
             {exploreLinks.map((link) => (
               <li key={link.href}>
+                {/* min-h keeps each a 44px touch target on phones */}
                 <Link
                   href={link.href}
-                  className="text-foreground/80 transition-colors hover:text-momo-gold"
+                  className="inline-flex min-h-11 items-center text-foreground/80 transition-colors hover:text-momo-gold"
                 >
                   {link.label}
                 </Link>
@@ -70,7 +71,7 @@ export function Footer() {
             href={site.instagram.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-foreground/80 transition-colors hover:text-momo-gold"
+            className="flex min-h-11 items-center gap-2 text-sm text-foreground/80 transition-colors hover:text-momo-gold"
           >
             <InstagramIcon size={16} className="text-momo-gold" />
             {site.instagram.handle}

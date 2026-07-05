@@ -21,7 +21,7 @@ export default function NotFound() {
         <div className="flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/"
-            className="tap-target inline-flex items-center gap-2 rounded-full bg-momo-gold px-6 py-3 text-sm font-semibold text-charcoal transition-colors hover:bg-momo-gold/90"
+            className="tap-target inline-flex items-center gap-2 rounded-full bg-momo-gold px-6 py-3 text-sm font-semibold text-on-gold transition-colors hover:bg-momo-gold/90"
           >
             <ArrowLeft size={16} aria-hidden />
             Back to home

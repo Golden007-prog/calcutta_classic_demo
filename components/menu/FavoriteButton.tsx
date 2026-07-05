@@ -2,9 +2,9 @@
 
 import { Heart } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { useEffect, useState } from "react";
 
 import { burst } from "@/lib/burst";
+import { useMounted } from "@/lib/use-mounted";
 import { cn } from "@/lib/utils";
 import { useFavorites } from "@/stores/favorites";
 import { playPop } from "@/stores/sound";
@@ -22,12 +22,10 @@ export function FavoriteButton({
   name: string;
   className?: string;
 }) {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const slugs = useFavorites((s) => s.slugs);
   const toggle = useFavorites((s) => s.toggle);
   const reduced = useReducedMotion();
-
-  useEffect(() => setMounted(true), []);
 
   const isFavorite = mounted && slugs.includes(slug);
 

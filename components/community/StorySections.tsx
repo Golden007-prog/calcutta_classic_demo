@@ -61,8 +61,9 @@ export function HistoryTimeline() {
 
       <ol className="relative mt-8 space-y-10 border-l border-line pl-8">
         {TIMELINE.map((entry) => (
-          <Reveal key={entry.era} className="relative">
-            <li>
+          // <ol> may only contain <li> — the Reveal animates inside it.
+          <li key={entry.era} className="relative">
+            <Reveal>
               <span
                 aria-hidden
                 className="absolute -left-[37px] top-1 size-4 rounded-full border-2 border-momo-gold bg-background"
@@ -72,8 +73,8 @@ export function HistoryTimeline() {
               </p>
               <h3 className="mt-1 font-display text-xl font-semibold">{entry.title}</h3>
               <p className="mt-1 max-w-xl text-sm text-soft md:text-base">{entry.copy}</p>
-            </li>
-          </Reveal>
+            </Reveal>
+          </li>
         ))}
       </ol>
     </section>

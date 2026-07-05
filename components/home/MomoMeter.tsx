@@ -20,6 +20,7 @@ export function MomoMeter() {
     if (!inView) return;
 
     const reading = momoMeter();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot: the reading is time-of-day dependent and must be computed on the client after mount
     setSteaming(reading.isSteaming);
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

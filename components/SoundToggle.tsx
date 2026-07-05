@@ -1,17 +1,16 @@
 "use client";
 
 import { Volume2, VolumeX } from "lucide-react";
-import { useEffect, useState } from "react";
 
+import { useMounted } from "@/lib/use-mounted";
 import { playPop, useSound } from "@/stores/sound";
 
 /** Feature 85 — footer toggle for the (off-by-default) UI sounds. */
 export function SoundToggle() {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const enabled = useSound((s) => s.enabled);
   const toggle = useSound((s) => s.toggle);
 
-  useEffect(() => setMounted(true), []);
   const on = mounted && enabled;
 
   return (

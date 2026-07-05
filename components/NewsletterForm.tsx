@@ -57,7 +57,7 @@ export function NewsletterForm() {
         <button
           type="submit"
           aria-label="Subscribe"
-          className="tap-target inline-flex shrink-0 items-center justify-center rounded-full bg-momo-gold px-4 text-charcoal transition-colors hover:bg-momo-gold/90"
+          className="tap-target inline-flex shrink-0 items-center justify-center rounded-full bg-momo-gold px-4 text-on-gold transition-colors hover:bg-momo-gold/90"
         >
           <Mail size={16} aria-hidden />
         </button>

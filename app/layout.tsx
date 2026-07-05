@@ -3,6 +3,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, Noto_Serif_Bengali } from "next/font/google";
 
+import { AmbientGlow } from "@/components/fx/AmbientGlow";
 import { ChiliCursor } from "@/components/fx/ChiliCursor";
 import { SmoothScroll } from "@/components/fx/SmoothScroll";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
@@ -37,7 +38,8 @@ const notoBengali = Noto_Serif_Bengali({
   variable: "--font-noto-bengali",
   display: "swap",
   weight: ["400", "600", "700"],
-  // Accent words only — keep the ~190KB face off the critical path.
+  // One variable file serves all three weights; keep it off the
+  // critical path (accent words only).
   preload: false,
 });
 
@@ -77,10 +79,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${fraunces.variable} ${inter.variable} ${notoBengali.variable} font-sans antialiased`}
-      >
+    <html
+      lang="en"
+      suppressHydrationWarning
+      // Font variables MUST live on <html>: Tailwind's @theme resolves
+      // --font-sans/--font-bengali at :root — on <body> they never apply.
+      className={`${fraunces.variable} ${inter.variable} ${notoBengali.variable}`}
+    >
+      <body className="font-sans antialiased">
         {/* Steam Ritual gate — runs before paint so repeat visitors never
             see a preloader frame (feature 86). */}
         <script
@@ -92,10 +98,11 @@ export default function RootLayout({
         <ThemeProvider>
           <a
             href="#main"
-            className="sr-only z-[60] rounded-full bg-momo-gold px-4 py-2 text-sm font-medium text-charcoal focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+            className="sr-only z-[60] rounded-full bg-momo-gold px-4 py-2 text-sm font-medium text-on-gold focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
           >
             Skip to content
           </a>
+          <AmbientGlow />
           <SmoothScroll />
           <ChiliCursor />
           <TopBarLoader />

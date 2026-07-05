@@ -1,0 +1,49 @@
+# BUGS — Round 2 fix & audit log
+
+Severity: **P0** blocker · **P1** major · **P2** polish. Status: ☑ fixed (verified in a real browser) · ☐ open.
+
+## Part A — reported
+
+| # | Sev | Status | Bug | Root cause (verified in devtools/Playwright) | Fix |
+|---|-----|--------|-----|----------------------------------------------|-----|
+| A1 | P0 | ☑ | Glass cards render as flat grey slabs | Glass was theme-flipping: with the `.light` theme persisted in localStorage, cards rendered `bg-white/60` milky panels against dark photography ("grey slabs fighting the dark theme"); in dark mode the 10% tint sat on a flat `#0f0f10` background, so the blur had nothing to sample. No explicit `-webkit-backdrop-filter`. | One `.cc-glass` recipe, smoked/dark in BOTH themes: `rgb(255 255 255/.06)` + `blur(20px) saturate(140%)` (+ `-webkit-`), hairline border, inset highlight, `@supports` solid fallback; fixed `AmbientGlow` layer (drifting momo-gold/chili radial blobs + grain) behind the whole app; navbar/tab bars always `zinc-950` tint — never light grey. Verified: computed `rgba(255,255,255,0.06)` + `blur(20px) saturate(1.4)`, nav `rgba(9,9,11,0.55)`. |
+| A2 | P0 | ☑ | Card/desc text grey-on-grey unreadable | Semantic `--soft/--foreground` flip with theme; on light theme dark-grey text landed on grey glass. Hero strips at 40–50% opacity. | On-glass semantic vars pinned to cream inside `.cc-glass` (both themes); `--soft` floor = cream @ 66% (74% on light glass); all sub-60% text opacities raised to ≥65% (decorative aria-hidden monogram exempt); save-pill → `bg-leaf/20 text-leaf-soft`. Axe color-contrast (WCAG 2AA): **0 violations on all 12 routes × both themes**. |
+| A3 | P0 | ☑ | Chili cursor frozen + double cursor | Original design deliberately kept the native cursor; position went through React-state-coupled springs and per-move re-renders. | Rebuilt: `pointermove` → rAF loop, lerp 0.2, `translate3d`, zero state per move; `html.cc-cursor-none` hides the native cursor only while active (removed on unmount/error); gated `(pointer:fine) and (hover:hover)`, off under reduced-motion; scales 1.5× over interactive targets, squishes on press; hides on window leave. Verified: `cursor: none` everywhere while chili tracks 1:1. |
+| A4 | P1 | ☑ | 3D momo colorless plastic spinning-top | `LatheGeometry` profile + flat `meshStandardMaterial`, no env/tone-mapping/shadow. | Rebuilt: squashed-sphere body + 12 surface-hugging TubeGeometry pleats swirling ~50° into a top knot; `meshPhysicalMaterial` dough ivory `#EBD9B4` (roughness .55, clearcoat .12, sheen .4, warm emissive fake-SSS) + procedural canvas-noise bump; warm-key/cool-rim/bounce light rig (no HDR fetch — offline/Pages safe), ACES tone mapping @ 1.1, blob contact shadow, Float bob, steam kept. DPR ≤1.5, lazy, pauses off-tab. |
+| A5.1 | P1 | ☑ | "1 cups Belgian Coffee" | Units stored plural in `data/menu.ts`; renderer special-cased only "plate". | `pluralize()` in `lib/utils`; units normalized to singular (`pc/cup/plate`); ComboCard + PrintMenu use it. |
+| A5.2 | P1 | ☑ | Inconsistent card hover (one orange border) | FoodieZoneTeaser had ad-hoc `hover:border-momo-gold/40`; other cards none. | `interactive` prop on `Glass` → single hover/focus-visible/`:has(:focus-visible)` treatment (gold border + 2px lift + glow) on foodie teasers, dish cards, combo cards, bestsellers, blog cards, pairing cards. |
+| A5.3 | P1 | ☑ | Stuck chili sprite over combo card | Artifact of A3. | Gone with the A3 rebuild (verified in combos screenshots). |
+| A5.4 | P1 | ☑ | 3D momo collides with steamer photo; bad on mobile | Absolute 70vw canvas overlay at all breakpoints. | Hidden below `md` (also saves a WebGL context on phones); repositioned `right-[3vw] top-[10vh] h-[54vh] w-[30vw]`, model scaled 0.82 — floats above the basket, no clipping. |
+| A5.5 | P1 | ☑ | Combos rail hard-clips text at viewport edge ("y human", "ering ₹20") | Pinned rail translates across a full-bleed `overflow-hidden` section. | Edge vignette strips (gradient overlays, lg-only) fade partial cards; overlays not `mask-image` because an ancestor mask would break the cards' backdrop-filter. |
+
+## Part B — found in audit (all fixed unless noted)
+
+| # | Sev | Status | Bug | Fix |
+|---|-----|--------|-----|-----|
+| B1 | P2 | ☑ | 17 console warnings: `next/image` qualities 55/70 unconfigured | `images.qualities: [55, 70, 75]` in next.config. |
+| B2 | P2 | ☑ | `THREE.Clock` deprecation warning (R3F internals; Clock deprecated since three r183) | Pinned `three@0.182.0` (+ matching types); drei/fiber peer ranges satisfied. |
+| B3 | P2 | ☑ | Six junk files committed at repo root (`{,-`, `b.value`, `cached`, `cached)`, `cap)`, `li]`) from a PS 5.1 quoting accident | `git rm` (all were empty). |
+| B4 | **P0** | ☑ | **Site-wide fonts never applied** — Fraunces/Inter/Noto Serif Bengali all `unloaded`; body rendered system sans; Bengali fell back to non-Bengali glyph shaping | next/font `variable` classes were on `<body>`, but Tailwind v4 `@theme` resolves `--font-sans`/`--font-bengali` at `:root` → `var(--font-inter)` etc. undefined there → guaranteed-invalid → inherited fallbacks. Moved font variable classes to `<html>`. Verified: body=Inter, headings=Fraunces, `.font-bengali`=Noto Serif Bengali, all `loaded`. |
+| B5 | P1 | ☑ | `<ol>` containing `<div>` children (axe `list`/`listitem`, our-story timeline) | `<li>` is now the direct child; Reveal animates inside it. |
+| B6 | P1 | ☑ | `aria-label` on plain `<div>`s (axe `aria-prohibited-attr`, star ratings ×6) | `role="img"` on the star-row divs. |
+| B7 | P2 | ☑ | motion warning: animating opacity/cy/r from "undefined" (ThemeToggle SVG) | Static geometry attrs + `initial={false}`; animate transform (scale/y) instead of cy/r — also fixed console error `<circle> attribute cy: Expected length, "undefined"`. |
+| B8 | P1 | ☑ | "try 1 dishes" (badge board) + un-earned badges dimmed to 50% opacity (contrast fail) | `pluralize()`; dim via `grayscale` instead of opacity. |
+| B9 | P0 | ☑ | Light theme: 8–84 axe contrast failures per page (nav links over cream, muted-on-glass, gold/chili text on cream at 1.9–3.9:1) | Light glass tint deepened to 0.80 (+ soft 74%); light navbar tint 0.85; brand hues darken on the light canvas (`--color-momo-gold #91600e`, chili `#ad3423`, leaf `#3e6b3e`) and are restored to bright values inside `.cc-glass`; new `on-gold` token replaces `text-charcoal` on every gold fill; disabled CallButton restyled; BudgetTools selected chip restyled. Result: **axe 0 violations on 12 routes × 2 themes** (final run). |
+| B10 | P2 | ☑ | Footer quick links 28×17px touch targets | `min-h-11` inline-flex targets (footer links + Instagram link). |
+| B11 | P2 | ☑ | D3D shader warning X4122 from drei `<Environment>`/PMREM + ContactShadows on Windows/ANGLE | Replaced with a plain 4-light rig + radial-gradient blob shadow (also cheaper). |
+| B12 | P2 | ☑ | drei ContactShadows re-renders per frame | Superseded by B11 (static textured plane). |
+| B13 | **P0** | ☑ | **Every soft navigation away from home crashed to the error boundary** ("This page couldn't load") — reproduced on the LIVE site and the local prod build | GSAP ScrollTrigger `pin: true` wraps the Signature Combos `<section>` in a pin-spacer (re-parents it); React unmounts the home route by removing its top-level children, calls `removeChild` on the section whose parent no longer matches → DOMException → error boundary. Fixed with a stable boundary `<div>` owned by the component around the pinned section, so GSAP's DOM surgery stays outside React's removal path. Verified: home→menu→dish and mid-pin-scrub navigation, zero errors. |
+| B14 | P2 | ☑ | Local Windows static export writes RSC payloads as nested dirs (`__next.menu/$d$slug/…`) while the client requests dotted names → local-only broken export | Known upstream Windows `path.sep` bug (vercel/next.js#85374 / PR #86948, unmerged). Linux CI builds are unaffected (live artifact is dotted+consistent). Local verification flattens payloads to the Linux layout before serving. |
+| B15 | P1 | ☑ | GitHub Pages build shipped full-size JPEG masters (no optimizer with `output: export`; dish cards ~120KB, hero 353KB) | Pre-generated responsive WebP variants (`scripts/generate-static-variants.mjs`, committed under `public/images/opt/`) + custom next/image loader (`lib/pages-image-loader.ts`) active only when `GITHUB_PAGES=true`. |
+
+**Expected / not bugs:** the 404 route logs one `Failed to load resource: 404` (that IS the HTTP status of the 404 page — correct); the sr-only skip-link measures <44px while visually hidden (it expands when focused); dev-server occasionally drops an image request with `ERR_CONNECTION_RESET` on /gallery (dev-only flake — re-verified clean on the prod build).
+
+## Verification runs (Playwright + Chrome, 1440×900 & mobile widths)
+
+- **Console/hydration sweep** — 12 routes × dark+light, dev: zero errors/warnings (final run; only the expected 404 status on the 404 page). Prod-build sweep: see below.
+- **Axe (WCAG 2A/2AA)** — 12 routes × 2 themes: **0 violations**.
+- **Responsive matrix** — 360/390/430/768/1024/1440/1920 × 7 routes: zero horizontal scroll, no clipped text found, tap-targets ≥44px after B10.
+- **Widgets** — quiz→result (aria-live ✓), wheel spin→result (aria-live ✓), craving matcher sliders→matches, budget finder→plan, poll→percentages, badge chips→count, menu search (17→7), veg filter (17→5 correct items), favorites (aria-pressed), dish modal soft-nav + Escape, language toggle → Bengali names in Noto Serif Bengali (loaded ✓), theme toggle round-trip.
+- **Reduced motion** — no 3D canvas, no custom cursor, no marquee animation, Lenis off, page fully readable.
+- **Keyboard** — 14-stop walkthrough: momo-gold focus ring visible on every stop, logical order, skip-link first.
+- Lighthouse (live): _pending Part C_
