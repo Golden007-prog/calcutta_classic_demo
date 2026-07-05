@@ -29,7 +29,7 @@ export function MenuPreview() {
       </div>
 
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {bestsellers.map((item, i) => (
+        {bestsellers.map((item) => (
           <li key={item.slug}>
             <Glass as="article" className="group flex h-full flex-col overflow-hidden">
               <div className="relative">
@@ -39,7 +39,6 @@ export function MenuPreview() {
                   label={item.name}
                   className="aspect-[4/3] w-full transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none"
                   sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 380px"
-                  priority={i === 0}
                 />
                 <span className="absolute left-3 top-3 rounded-full bg-momo-gold px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-charcoal">
                   Bestseller

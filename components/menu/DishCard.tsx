@@ -33,7 +33,6 @@ export function DishCard({ item, nameRanges, className }: DishCardProps) {
       <Link
         href={`/menu/${item.slug}`}
         className="flex h-full flex-col focus-visible:outline-none"
-        aria-label={`${item.name} — details`}
       >
         <div className="relative">
           <DishImage
@@ -51,7 +50,7 @@ export function DishCard({ item, nameRanges, className }: DishCardProps) {
               </span>
             )}
             {item.chefsPick && (
-              <span className="rounded-full bg-chili px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-cream">
+              <span className="rounded-full bg-chili-deep px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-cream">
                 Chef&apos;s Pick
               </span>
             )}

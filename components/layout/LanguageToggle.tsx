@@ -17,7 +17,7 @@ export function LanguageToggle() {
     <button
       type="button"
       onClick={() => setLang(lang === "en" ? "bn" : "en")}
-      aria-label={lang === "en" ? "বাংলায় দেখুন (switch to Bengali)" : "Switch to English"}
+      title={lang === "en" ? "বাংলায় দেখুন" : "Switch to English"}
       className="tap-target inline-flex items-center gap-1 rounded-full px-2 text-sm font-medium text-foreground/80 transition-colors hover:text-momo-gold"
     >
       <span className={cn(lang === "en" && "text-momo-gold")}>EN</span>

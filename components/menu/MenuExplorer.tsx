@@ -157,7 +157,7 @@ export function MenuExplorer({ items, combos }: { items: MenuItem[]; combos: Com
               onClick={() => setSpice(spice === level ? null : level)}
               className={chip(spice === level)}
               aria-pressed={spice === level}
-              aria-label={`Spice level ${level}`}
+              aria-label={level === 0 ? undefined : `Spice level ${level}`}
             >
               {level === 0 ? "No spice" : "🌶".repeat(level)}
             </button>

@@ -97,6 +97,7 @@ export function DishImage({
         sizes={sizes}
         priority={priority}
         fetchPriority={priority ? "high" : undefined}
+        quality={70}
         placeholder="blur"
         blurDataURL={entry.blurDataURL}
         onLoad={() => setLoaded(true)}

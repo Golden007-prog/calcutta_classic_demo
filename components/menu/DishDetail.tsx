@@ -41,7 +41,7 @@ export function DishDetail({ item, inModal = false }: { item: MenuItem; inModal?
               </span>
             )}
             {item.chefsPick && (
-              <span className="rounded-full bg-chili px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-cream">
+              <span className="rounded-full bg-chili-deep px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-cream">
                 Chef&apos;s Pick
               </span>
             )}

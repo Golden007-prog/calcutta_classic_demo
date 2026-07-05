@@ -1,3 +1,5 @@
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, Noto_Serif_Bengali } from "next/font/google";
 
@@ -9,9 +11,12 @@ import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
 import { Preloader } from "@/components/preloader/Preloader";
+import { StructuredData } from "@/components/StructuredData";
+import { SwRegister } from "@/components/SwRegister";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { TopBarLoader } from "@/components/TopBarLoader";
 import { site } from "@/data/site";
+import { SITE_URL } from "@/lib/site-url";
 
 import "./globals.css";
 
@@ -32,9 +37,12 @@ const notoBengali = Noto_Serif_Bengali({
   variable: "--font-noto-bengali",
   display: "swap",
   weight: ["400", "600", "700"],
+  // Accent words only — keep the ~190KB face off the critical path.
+  preload: false,
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "The Calcutta Classics — Street Food in Shyambazar, Kolkata",
     template: "%s · The Calcutta Classics",
@@ -47,6 +55,12 @@ export const metadata: Metadata = {
     "Belgian coffee ₹20",
     "The Calcutta Classics",
   ],
+  alternates: { canonical: "./" },
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    locale: "en_IN",
+  },
 };
 
 export const viewport: Viewport = {
@@ -97,6 +111,15 @@ export default function RootLayout({
           <BottomTabBar />
           <WhatsAppFloat />
         </ThemeProvider>
+        <StructuredData />
+        <SwRegister />
+        {/* Vercel-hosted deploys only — the scripts 404 anywhere else. */}
+        {process.env.VERCEL && (
+          <>
+            <Analytics />
+            <SpeedInsights />
+          </>
+        )}
       </body>
     </html>
   );

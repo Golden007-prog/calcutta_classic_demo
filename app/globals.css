@@ -9,6 +9,11 @@
   --color-momo-gold: #e8a13a;
   --color-chili: #d64533;
   --color-leaf: #4f7a4f;
+  /* WCAG-safe text tints of chili/leaf for dark surfaces (feature 107). */
+  --color-chili-soft: #f08a75;
+  --color-leaf-soft: #8fbc8f;
+  /* Deep chili: cream text passes 4.5:1 on this fill. */
+  --color-chili-deep: #b23a22;
 
   /* Type — wired to next/font variables in app/layout.tsx */
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
@@ -232,6 +237,11 @@ body {
   main {
     padding: 0 !important;
   }
+}
+
+/* Announcement bar: hidden pre-paint for users who dismissed it. */
+html[data-announce-hidden="1"] #cc-announce {
+  display: none;
 }
 
 /* First-paint gate for the Steam Ritual: overlay markup only becomes

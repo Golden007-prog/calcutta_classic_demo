@@ -22,14 +22,14 @@ export function HeroMomo({ className }: { className?: string }) {
     const el = ref.current;
     if (!el) return;
 
-    let idleId: number | undefined;
+    let timerId: number | undefined;
     const io = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
         io.disconnect();
-        idleId = (window.requestIdleCallback ?? window.setTimeout)(() =>
-          setReady(true),
-        ) as unknown as number;
+        // Idle + a settle delay so the three.js chunk never contends
+        // with the LCP/critical path (feature 98).
+        timerId = window.setTimeout(() => setReady(true), 2500);
       },
       { rootMargin: "200px" },
     );
@@ -37,8 +37,7 @@ export function HeroMomo({ className }: { className?: string }) {
 
     return () => {
       io.disconnect();
-      if (idleId !== undefined)
-        (window.cancelIdleCallback ?? window.clearTimeout)(idleId);
+      window.clearTimeout(timerId);
     };
   }, []);
 

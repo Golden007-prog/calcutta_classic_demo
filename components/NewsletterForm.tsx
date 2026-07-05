@@ -32,7 +32,7 @@ export function NewsletterForm() {
 
   if (done) {
     return (
-      <p className="flex items-center gap-2 text-sm text-leaf" role="status">
+      <p className="flex items-center gap-2 text-sm text-leaf dark:text-leaf-soft" role="status">
         <Check size={15} aria-hidden />
         You&apos;re on the list — steam news incoming.
       </p>

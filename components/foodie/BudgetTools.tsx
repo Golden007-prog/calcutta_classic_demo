@@ -48,7 +48,7 @@ export function BudgetFinder() {
                   <span>
                     <span className="font-semibold text-momo-gold">{pick.qty} ×</span> {pick.label}
                     {pick.isCombo && (
-                      <span className="ml-2 rounded-full bg-leaf/15 px-2 py-0.5 text-[11px] font-semibold text-leaf">
+                      <span className="ml-2 rounded-full bg-leaf/15 px-2 py-0.5 text-[11px] font-semibold text-leaf dark:text-leaf-soft">
                         combo value
                       </span>
                     )}

@@ -56,9 +56,9 @@ export function MomoMeter() {
       <span className="text-xs uppercase tracking-[0.3em] text-soft">
         momos steamed today{" "}
         {steaming ? (
-          <span className="text-leaf">· steamer on</span>
+          <span className="text-leaf dark:text-leaf-soft">· steamer on</span>
         ) : (
-          <span className="text-chili">· closed, counting since noon</span>
+          <span className="text-chili dark:text-chili-soft">· closed, counting since noon</span>
         )}
       </span>
     </p>

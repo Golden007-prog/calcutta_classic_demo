@@ -28,19 +28,32 @@ export function HeroVideo() {
         ?.saveData === true;
     if (reduced || saveData) return;
 
-    let idleId: number;
-    const mount = () => {
-      idleId = (window.requestIdleCallback ?? window.setTimeout)(() =>
-        setShowVideo(true),
-      ) as unknown as number;
+    // Mount well clear of the LCP window: after load + a settle delay,
+    // or immediately on first user intent — whichever comes first.
+    let timerId: number | undefined;
+    const show = () => {
+      setShowVideo(true);
+      cleanup();
+    };
+    const onIntent = () => show();
+    const cleanup = () => {
+      window.clearTimeout(timerId);
+      window.removeEventListener("scroll", onIntent);
+      window.removeEventListener("pointerdown", onIntent);
     };
 
-    if (document.readyState === "complete") mount();
-    else window.addEventListener("load", mount, { once: true });
+    const arm = () => {
+      timerId = window.setTimeout(show, 3500);
+      window.addEventListener("scroll", onIntent, { once: true, passive: true });
+      window.addEventListener("pointerdown", onIntent, { once: true });
+    };
+
+    if (document.readyState === "complete") arm();
+    else window.addEventListener("load", arm, { once: true });
 
     return () => {
-      window.removeEventListener("load", mount);
-      (window.cancelIdleCallback ?? window.clearTimeout)(idleId);
+      window.removeEventListener("load", arm);
+      cleanup();
     };
   }, []);
 
@@ -84,6 +97,7 @@ export function HeroVideo() {
           priority
           fetchPriority="high"
           sizes="100vw"
+          quality={55}
           placeholder="blur"
           blurDataURL={poster.blurDataURL}
           className="object-cover"

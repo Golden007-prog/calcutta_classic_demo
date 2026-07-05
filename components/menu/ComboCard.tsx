@@ -84,7 +84,7 @@ export function ComboCard({ combo }: { combo: Combo }) {
           </div>
           {savings !== null && savings > 0 && (
             <p
-              className="rounded-full bg-leaf/15 px-3 py-1.5 text-sm font-semibold text-leaf"
+              className="rounded-full bg-leaf/15 px-3 py-1.5 text-sm font-semibold text-leaf dark:text-leaf-soft"
               aria-label={`You save ${formatINR(savings)}`}
             >
               save {formatINR(savedDisplay)}

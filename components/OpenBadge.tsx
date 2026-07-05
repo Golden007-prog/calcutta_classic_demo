@@ -22,7 +22,9 @@ export function OpenBadge({ className }: { className?: string }) {
     <p
       className={cn(
         "inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-sm",
-        status.open ? "border-leaf/50 text-leaf" : "border-chili/50 text-chili",
+        status.open
+          ? "border-leaf/50 text-leaf dark:text-leaf-soft"
+          : "border-chili/50 text-chili dark:text-chili-soft",
         className,
       )}
     >

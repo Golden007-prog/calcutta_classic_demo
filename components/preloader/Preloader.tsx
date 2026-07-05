@@ -24,9 +24,13 @@ const SESSION_KEY = "cc-steam-ritual";
 const MAX_MS = 2500;
 const MIN_MS = 900;
 
-/** Warmed while the ritual plays (feature 92). */
+/**
+ * Warmed while the ritual plays (feature 92) — via low-priority
+ * <link rel="prefetch"> so the browser schedules them AFTER the LCP
+ * poster instead of competing with it (spec §8: never fight the budget).
+ */
 const WARM_ASSETS = [
-  "/images/hero/momo-basket.jpg",
+  "/images/hero/video-poster.jpg",
   "/images/dishes/steam-momo.jpg",
   "/images/dishes/bhetki-fish-fry.jpg",
   "/images/dishes/momo-burger.jpg",
@@ -96,33 +100,37 @@ export function Preloader() {
     setReduced(prefersReduced);
 
     const started = performance.now();
-    let loaded = 0;
-    const total = WARM_ASSETS.length + 1; // +1 for fonts
+    let fontsReady = false;
     let raf = 0;
 
-    const bump = () => {
-      loaded += 1;
-    };
+    document.fonts.ready.then(() => {
+      fontsReady = true;
+    });
 
-    document.fonts.ready.then(bump);
-    for (const src of WARM_ASSETS) {
-      const img = new Image();
-      img.onload = bump;
-      img.onerror = bump; // missing asset ≠ stuck ritual
-      img.src = src;
-    }
+    // Low-priority warm-up, scheduled well after the LCP window so the
+    // hero poster keeps the whole pipe to itself.
+    window.setTimeout(() => {
+      for (const href of WARM_ASSETS) {
+        const link = document.createElement("link");
+        link.rel = "prefetch";
+        link.as = "image";
+        link.href = href;
+        document.head.appendChild(link);
+      }
+    }, 4000);
 
     const cap = prefersReduced ? 800 : MAX_MS;
 
     const tick = () => {
       if (doneRef.current) return;
       const elapsed = performance.now() - started;
-      const real = (loaded / total) * 100;
-      const floor = (elapsed / cap) * 100; // time-based floor so it never stalls
+      // Fonts are the only real blocking signal; time floors the rest.
+      const real = fontsReady ? 88 + Math.min(12, (elapsed / MIN_MS) * 12) : 0;
+      const floor = (elapsed / cap) * 100;
       const value = Math.min(99, Math.max(real, floor));
       setProgress(Math.round(value));
 
-      if ((real >= 100 && elapsed >= MIN_MS) || elapsed >= cap) {
+      if ((fontsReady && elapsed >= MIN_MS) || elapsed >= cap) {
         finish();
         return;
       }

@@ -68,7 +68,7 @@ export function BadgeBoard() {
               aria-pressed={done}
               className={`tap-target inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-sm transition-colors ${
                 done
-                  ? "border-leaf bg-leaf/15 text-leaf"
+                  ? "border-leaf bg-leaf/15 text-leaf dark:text-leaf-soft"
                   : "border-line text-foreground/75 hover:border-momo-gold/50"
               }`}
             >
