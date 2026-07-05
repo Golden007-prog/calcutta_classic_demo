@@ -31,6 +31,8 @@ interface DishImageProps {
   priority?: boolean;
   /** Placeholder label (dish name); first letter becomes the monogram. */
   label?: string;
+  /** view-transition-name for card→page image morphs (feature 79). */
+  transitionName?: string;
 }
 
 export function DishImage({
@@ -40,8 +42,13 @@ export function DishImage({
   sizes = "(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 400px",
   priority = false,
   label,
+  transitionName,
 }: DishImageProps) {
   const entry = generatedImages[src];
+
+  const style = transitionName
+    ? ({ viewTransitionName: transitionName } as React.CSSProperties)
+    : undefined;
 
   if (!entry) {
     const gradient =
@@ -50,6 +57,7 @@ export function DishImage({
       <div
         role="img"
         aria-label={alt}
+        style={style}
         className={cn(
           "grain relative flex items-center justify-center overflow-hidden bg-gradient-to-br",
           gradient,
@@ -69,7 +77,7 @@ export function DishImage({
   }
 
   return (
-    <div className={cn("relative overflow-hidden", className)}>
+    <div style={style} className={cn("relative overflow-hidden", className)}>
       <Image
         src={src}
         alt={alt}

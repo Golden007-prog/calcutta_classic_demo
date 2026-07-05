@@ -5,21 +5,21 @@ a reduced-motion path. Phases in parentheses show where each lands.
 
 ## Menu & dishes (1–15) — Phase 5
 
-- [ ] 1. Interactive menu with animated category tabs (Momos / Chaat & Snacks / Fried & Loaded / Combos / Beverages)
-- [ ] 2. Dish detail view: photo, crave-copy, price, spice, tags, pairing
-- [ ] 3. Veg/non-veg filter with green/red dot markers
-- [ ] 4. Spice-level filter (chili icons, 0–3)
-- [ ] 5. Price sort + under-₹X quick filters
-- [ ] 6. Instant fuzzy search with highlighted matches
-- [ ] 7. Bestseller / Chef's Pick badges
-- [ ] 8. Combo contents visualizer (each item animates into the box)
-- [ ] 9. Combo savings calculator (combo vs à la carte, animated counter)
-- [ ] 10. Swipeable dish cards on mobile (snap scroll)
-- [ ] 11. Sticky glass mini-nav of categories with scroll-spy
-- [ ] 12. "Pairs well with" suggestions (everything pairs with ₹20 Belgian Coffee)
-- [ ] 13. Allergen/ingredient accordion per dish
-- [ ] 14. Ingredient chips ("what's inside") on dish pages
-- [ ] 15. Print-optimized menu + "Download menu" (generated PDF or print CSS)
+- [x] 1. Interactive menu with animated category tabs (Momos / Chaat & Snacks / Fried & Loaded / Combos / Beverages)
+- [x] 2. Dish detail view: photo, crave-copy, price, spice, tags, pairing
+- [x] 3. Veg/non-veg filter with green/red dot markers
+- [x] 4. Spice-level filter (chili icons, 0–3)
+- [x] 5. Price sort + under-₹X quick filters
+- [x] 6. Instant fuzzy search with highlighted matches
+- [x] 7. Bestseller / Chef's Pick badges
+- [x] 8. Combo contents visualizer (each item animates into the box)
+- [x] 9. Combo savings calculator (combo vs à la carte, animated counter)
+- [x] 10. Swipeable dish cards on mobile (snap scroll)
+- [x] 11. Sticky glass mini-nav of categories with scroll-spy
+- [x] 12. "Pairs well with" suggestions (everything pairs with ₹20 Belgian Coffee)
+- [x] 13. Allergen/ingredient accordion per dish
+- [x] 14. Ingredient chips ("what's inside") on dish pages
+- [x] 15. Print-optimized menu + "Download menu" (generated PDF or print CSS)
 
 ## Foodie experience (16–35) — Phase 6
 
@@ -40,7 +40,7 @@ a reduced-motion path. Phases in parentheses show where each lands.
 - [ ] 30. Hunger-level selector → portion suggestion ("2 plates. Trust us.")
 - [ ] 31. Guided "Menu Tour" — scroll-driven storytelling walk through the menu
 - [ ] 32. Emoji craving reactions per dish (stored locally, animated burst)
-- [ ] 33. Favorites/wishlist with heart animation (zustand + localStorage)
+- [x] 33. Favorites/wishlist with heart animation (zustand + localStorage)
 - [ ] 34. Compare-two-dishes side-by-side drawer
 - [ ] 35. Seasonal/festival specials section (data-driven)
 
@@ -95,7 +95,7 @@ a reduced-motion path. Phases in parentheses show where each lands.
 - [ ] 76. 3D perspective tilt on dish cards (pointer-tracked, springy)
 - [x] 77. Kinetic typography hero headline (per-word stagger, Bengali accent word)
 - [ ] 78. Dish-name marquee divider strips
-- [ ] 79. View Transitions API page morphs (dish card → dish page image morph)
+- [x] 79. View Transitions API page morphs (dish card → dish page image morph)
 - [ ] 80. Dark/light mode with animated sun/steam toggle (dark default)
 - [ ] 81. Animated SVG steam-curve section dividers
 - [ ] 82. Particle burst micro-interactions (favorite, quiz result, wheel win)

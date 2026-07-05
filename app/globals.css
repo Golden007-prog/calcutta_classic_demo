@@ -142,6 +142,39 @@ body {
   }
 }
 
+/* Feature 79 — cross-document View Transitions (dish card → dish page
+   image morph on full loads; soft navs get the animated modal instead). */
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Feature 15 — print: hide the app chrome, show the print menu only. */
+@media print {
+  header,
+  footer,
+  nav,
+  [id="cc-preloader-gate"] {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #111;
+  }
+
+  main {
+    padding: 0 !important;
+  }
+}
+
 /* First-paint gate for the Steam Ritual: overlay markup only becomes
    visible when the inline script stamps html[data-preload="1"]. */
 #cc-preloader-gate {
