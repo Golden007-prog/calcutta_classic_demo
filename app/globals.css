@@ -79,3 +79,75 @@ body {
   min-height: 44px;
   min-width: 44px;
 }
+
+/* Feature 84/88 — branded skeleton shimmer (opacity-only, compositor-safe). */
+@utility shimmer {
+  animation: cc-shimmer 1.6s ease-in-out infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes cc-shimmer {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Preloader scene animations (feature 86/87) — transform/opacity only. */
+.cc-steam {
+  animation: cc-steam-rise 1.6s ease-in-out infinite;
+}
+
+@keyframes cc-steam-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  35% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.cc-flip {
+  animation: cc-fry-flip 1.4s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+@keyframes cc-fry-flip {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  45% {
+    transform: translateY(-26px) rotate(180deg);
+  }
+  70% {
+    transform: translateY(0) rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-steam,
+  .cc-flip {
+    animation: none;
+  }
+}
+
+/* First-paint gate for the Steam Ritual: overlay markup only becomes
+   visible when the inline script stamps html[data-preload="1"]. */
+#cc-preloader-gate {
+  display: none;
+}
+
+html[data-preload="1"] #cc-preloader-gate {
+  display: block;
+}

@@ -105,13 +105,13 @@ a reduced-motion path. Phases in parentheses show where each lands.
 
 ## Signature loading system (86–92) — Phase 2
 
-- [ ] 86. First-visit preloader "The Steam Ritual" (sessionStorage-gated, max 2.5s, skippable)
-- [ ] 87. Preloader variants rotate per visit (coffee pour / fish fry flip / basket steam)
-- [ ] 88. Route-level `loading.tsx` = branded glass skeletons (never spinners)
-- [ ] 89. Progress counter with optional Bengali numerals (১২৩) tied to language toggle
-- [ ] 90. Micro top-bar loader for soft navigations (2px momo-gold bar)
-- [ ] 91. `prefers-reduced-motion` variant: static logo + fade, zero animation
-- [ ] 92. Preloader doubles as preload gate (hero poster, display font, first 6 dish images)
+- [x] 86. First-visit preloader "The Steam Ritual" (sessionStorage-gated, max 2.5s, skippable)
+- [x] 87. Preloader variants rotate per visit (coffee pour / fish fry flip / basket steam)
+- [x] 88. Route-level `loading.tsx` = branded glass skeletons (never spinners)
+- [x] 89. Progress counter with optional Bengali numerals (১২৩) tied to language toggle
+- [x] 90. Micro top-bar loader for soft navigations (2px momo-gold bar)
+- [x] 91. `prefers-reduced-motion` variant: static logo + fade, zero animation
+- [x] 92. Preloader doubles as preload gate (hero poster, display font, first 6 dish images)
 
 ## Performance, PWA, SEO, a11y (93–110) — Phase 9
 

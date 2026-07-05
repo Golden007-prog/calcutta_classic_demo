@@ -4,7 +4,9 @@ import { Fraunces, Inter, Noto_Serif_Bengali } from "next/font/google";
 import { BottomTabBar } from "@/components/layout/BottomTabBar";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
+import { Preloader } from "@/components/preloader/Preloader";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { TopBarLoader } from "@/components/TopBarLoader";
 import { site } from "@/data/site";
 
 import "./globals.css";
@@ -61,6 +63,14 @@ export default function RootLayout({
       <body
         className={`${fraunces.variable} ${inter.variable} ${notoBengali.variable} font-sans antialiased`}
       >
+        {/* Steam Ritual gate — runs before paint so repeat visitors never
+            see a preloader frame (feature 86). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(!sessionStorage.getItem('cc-steam-ritual')){document.documentElement.setAttribute('data-preload','1')}}catch(e){}",
+          }}
+        />
         <ThemeProvider>
           <a
             href="#main"
@@ -68,6 +78,8 @@ export default function RootLayout({
           >
             Skip to content
           </a>
+          <TopBarLoader />
+          <Preloader />
           <Navbar />
           <div className="pb-24 md:pb-0">
             <main id="main" className="min-h-screen pt-16">
