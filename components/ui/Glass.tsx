@@ -26,13 +26,22 @@ type GlassOwnProps<T extends ElementType> = {
 type GlassProps<T extends ElementType> = GlassOwnProps<T> &
   Omit<ComponentPropsWithoutRef<T>, keyof GlassOwnProps<T>>;
 
-export function Glass<T extends ElementType = "div">({
-  as,
-  variant = "card",
-  className,
-  ...rest
-}: GlassProps<T>) {
-  const Component = (as ?? "div") as ElementType;
+export function Glass<T extends ElementType = "div">(props: GlassProps<T>) {
+  // TS can't resolve ComponentPropsWithoutRef over an unresolved generic —
+  // cast internally; the caller-facing signature stays fully typed.
+  const {
+    as,
+    variant = "card",
+    className,
+    ...rest
+  } = props as {
+    as?: ElementType;
+    variant?: keyof typeof variants;
+    className?: string;
+  } & Record<string, unknown>;
+  const Component = (as ?? "div") as ElementType<
+    { className?: string } & Record<string, unknown>
+  >;
 
   return (
     <Component

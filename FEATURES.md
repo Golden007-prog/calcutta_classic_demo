@@ -28,7 +28,7 @@ a reduced-motion path. Phases in parentheses show where each lands.
 - [ ] 18. Craving matcher: cheesy/spicy/crunchy/saucy sliders → ranked matches
 - [ ] 19. Budget Bite Finder: "I have ₹___" slider → best combinations
 - [ ] 20. Group snack calculator: people + hunger level → suggested order (for walk-in)
-- [ ] 21. Momo-Meter: animated live-ish counter of momos steamed (seeded formula)
+- [x] 21. Momo-Meter: animated live-ish counter of momos steamed (seeded formula)
 - [ ] 22. Shareable "My Foodie Personality" result card (canvas-generated image)
 - [ ] 23. Daily special highlight driven by day-of-week data
 - [ ] 24. Weather-aware suggestion banner (rainy Kolkata → hot momos + coffee) via free weather API, graceful fallback
@@ -64,7 +64,7 @@ a reduced-motion path. Phases in parentheses show where each lands.
 
 ## Social & community (51–65) — Phase 7
 
-- [ ] 51. Instagram feed section for @the_calcutta_classics (static curated grid linking out)
+- [x] 51. Instagram feed section for @the_calcutta_classics (static curated grid linking out)
 - [ ] 52. UGC prompt: "Tag #CalcuttaClassics" with example posts
 - [ ] 53. Testimonials carousel with drag physics
 - [ ] 54. Google-review style rating strip (seeded data, real link TBD)
@@ -82,9 +82,9 @@ a reduced-motion path. Phases in parentheses show where each lands.
 
 ## Visual & interactive layer (66–85) — Phases 4 & 8
 
-- [ ] 66. R3F hero: floating 3D momo (primitives/lathe — no heavy GLB) with slow idle rotation, mouse parallax
-- [ ] 67. GPU steam particles rising through the hero
-- [ ] 68. Hero video background under a glass info panel
+- [x] 66. R3F hero: floating 3D momo (primitives/lathe — no heavy GLB) with slow idle rotation, mouse parallax
+- [x] 67. GPU steam particles rising through the hero
+- [x] 68. Hero video background under a glass info panel
 - [ ] 69. Glass navbar that condenses on scroll
 - [ ] 70. Chili custom cursor + hover states (desktop only)
 - [ ] 71. Magnetic buttons with spring physics
@@ -93,7 +93,7 @@ a reduced-motion path. Phases in parentheses show where each lands.
 - [ ] 74. Lenis smooth scroll wired into ScrollTrigger
 - [ ] 75. Horizontal pinned scroll section for Signature Combos
 - [ ] 76. 3D perspective tilt on dish cards (pointer-tracked, springy)
-- [ ] 77. Kinetic typography hero headline (per-word stagger, Bengali accent word)
+- [x] 77. Kinetic typography hero headline (per-word stagger, Bengali accent word)
 - [ ] 78. Dish-name marquee divider strips
 - [ ] 79. View Transitions API page morphs (dish card → dish page image morph)
 - [ ] 80. Dark/light mode with animated sun/steam toggle (dark default)
@@ -116,12 +116,12 @@ a reduced-motion path. Phases in parentheses show where each lands.
 ## Performance, PWA, SEO, a11y (93–110) — Phase 9
 
 - [ ] 93. `next/image` everywhere: AVIF/WebP, correct `sizes`, blur placeholders
-- [ ] 94. `priority` + `fetchpriority=high` on the LCP hero image/poster only
+- [x] 94. `priority` + `fetchpriority=high` on the LCP hero image/poster only
 - [ ] 95. RSC/SSG for all routes; ISR (daily) for specials
 - [ ] 96. `next/font` self-hosted subsets, `display: swap`, zero layout shift from fonts
 - [ ] 97. Route prefetching on viewport links; hover-intent prefetch for dish pages
 - [ ] 98. Three.js + GSAP heavy scenes dynamically imported, idle-loaded, viewport-rendered, DPR ≤1.5, paused on `visibilitychange`
-- [ ] 99. Hero video: poster-first, `preload="none"`, mounted post-LCP, ≤2MB, off-screen pause
+- [x] 99. Hero video: poster-first, `preload="none"`, mounted post-LCP, ≤2MB, off-screen pause
 - [ ] 100. Performance budget enforced: Lighthouse mobile ≥95, LCP <2.0s, CLS <0.05, INP <200ms
 - [ ] 101. PWA: installable, manifest, offline page + cached menu
 - [ ] 102. Structured data: `Restaurant` + `Menu` + `MenuItem` + `LocalBusiness` JSON-LD
